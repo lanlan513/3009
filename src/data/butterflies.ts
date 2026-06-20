@@ -464,26 +464,6 @@ export const butterflies: Butterfly[] = [
     features: ["翅膀反面完美拟态枯叶", "正面色彩艳丽蓝紫", "是拟态的经典案例", "飞行迅速"],
     popularity: 93,
   },
-  {
-    id: "22",
-    name: "绿尾大蚕蛾",
-    latinName: "Actias ningpoana",
-    family: "大蚕蛾科",
-    genus: "尾蚕蛾属",
-    category: "蛾类",
-    image: img("A Chinese moon moth with elegant pale green wings and long feathery tails, on a pine branch, ethereal, night butterfly"),
-    description: "绿尾大蚕蛾虽属蛾类，但其美丽程度丝毫不逊于任何蝴蝶。翅膀呈淡雅的苹果绿色，后翅拖着飘逸的长尾巴，被誉为「凤凰蛾」。",
-    distribution: "中国、俄罗斯远东、朝鲜半岛、日本",
-    distributionRegions: [
-      { continent: "亚洲", countries: ["中国", "俄罗斯", "韩国", "朝鲜", "日本"] },
-    ],
-    wingspan: "12 – 15 厘米",
-    habitat: "温带针阔混交林、公园",
-    climate: ["温带"],
-    rarity: "较常见",
-    features: ["翅膀苹果绿色", "后翅长尾飘逸", "具趋光性", "体型硕大"],
-    popularity: 85,
-  },
 ];
 
 export function getPopularButterflies(limit: number = 8): Butterfly[] {
@@ -781,33 +761,6 @@ export const butterflyFamilyTree: TaxonFamily[] = [
       },
     ],
   },
-  {
-    name: "大蚕蛾科",
-    latinName: "Saturniidae",
-    description: "大蚕蛾科虽属于蛾类，但许多种类的美丽程度丝毫不逊于蝴蝶。它们体型硕大，翅膀色彩绚丽，部分种类具有长长的尾突，被誉为「凤凰蛾」。",
-    characteristics: [
-      "体型硕大，多为大型蛾类",
-      "翅膀色彩绚丽，多具眼斑",
-      "部分种类具有长长的尾突",
-      "成虫多不取食，寿命较短",
-      "具趋光性，夜间活动",
-    ],
-    subfamilies: [
-      {
-        name: "大蚕蛾亚科",
-        latinName: "Saturniinae",
-        description: "大蚕蛾亚科包含了一些最美丽的蛾类，如绿尾大蚕蛾，其飘逸的长尾巴令人过目难忘。",
-        genera: [
-          {
-            name: "尾蚕蛾属",
-            latinName: "Actias",
-            description: "尾蚕蛾属的代表是绿尾大蚕蛾，翅膀呈淡雅的苹果绿色，后翅拖着飘逸的长尾巴，被誉为「凤凰蛾」。",
-            species: mapToSpecies(["22"]),
-          },
-        ],
-      },
-    ],
-  },
 ];
 
 export function getAllFamilyNames(): string[] {
@@ -827,4 +780,3 @@ export function getButterfliesByFamily(familyName: string): Butterfly[] {
 export function getButterfliesByGenus(genusName: string): Butterfly[] {
   return trueButterflies.filter((b) => b.genus === genusName);
 }
-

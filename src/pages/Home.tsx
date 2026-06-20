@@ -270,16 +270,16 @@ export default function Home() {
 
                       <div className="flex flex-wrap gap-2 mb-6">
                         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-butterfly-pink-light/40 text-butterfly-pink-deep">
-                          6 科
+                          5 科
                         </span>
                         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-butterfly-green-light/40 text-butterfly-green-deep">
-                          9 亚科
+                          8 亚科
                         </span>
                         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-butterfly-gold/30 text-butterfly-gold">
-                          15 属
+                          14 属
                         </span>
                         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-butterfly-ink/10 text-butterfly-ink/70">
-                          22 种
+                          21 种
                         </span>
                       </div>
 
