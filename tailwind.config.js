@@ -62,6 +62,14 @@ export default {
           "0%, 100%": { transform: "rotate(-3deg)" },
           "50%": { transform: "rotate(3deg)" },
         },
+        "lifecycle-fade-in": {
+          "0%": { opacity: "0", transform: "translateY(16px) scale(0.98)" },
+          "100%": { opacity: "1", transform: "translateY(0) scale(1)" },
+        },
+        "timeline-pulse": {
+          "0%, 100%": { boxShadow: "0 0 0 0 rgba(134, 185, 142, 0.4)" },
+          "50%": { boxShadow: "0 0 0 12px rgba(134, 185, 142, 0)" },
+        },
       },
       animation: {
         float: "float 6s ease-in-out infinite",
@@ -69,6 +77,8 @@ export default {
         "fade-in": "fade-in 1s ease-out forwards",
         shimmer: "shimmer 3s linear infinite",
         flutter: "flutter 4s ease-in-out infinite",
+        "lifecycle-fade-in": "lifecycle-fade-in 0.6s ease-out forwards",
+        "timeline-pulse": "timeline-pulse 2s ease-in-out infinite",
       },
       backgroundImage: {
         "grain": "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E\")",

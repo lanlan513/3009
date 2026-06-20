@@ -4,6 +4,7 @@ import { Sparkles, ArrowRight, Shuffle, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import ButterflyCard from "@/components/ButterflyCard";
 import ButterflyIcon from "@/components/ButterflyIcon";
+import ButterflyLifecycle from "@/components/ButterflyLifecycle";
 import { getPopularButterflies, getRandomButterflies, categories } from "@/data/butterflies";
 
 export default function Home() {
@@ -165,6 +166,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* 蝴蝶生命周期 */}
+      <ButterflyLifecycle />
 
       {/* 随机推荐 */}
       <section className="py-20 bg-cream-200/50 relative overflow-hidden">
