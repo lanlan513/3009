@@ -13,7 +13,7 @@ import WorldMap from "@/components/WorldMap";
 import ButterflyCard from "@/components/ButterflyCard";
 import type { Continent, Climate, RarityLevel } from "@/types";
 import {
-  butterflies,
+  trueButterflies,
   climates,
   rarityLevels,
   getCountriesByContinent,
@@ -28,7 +28,7 @@ export default function MapExplorer() {
   const [countryDropdownOpen, setCountryDropdownOpen] = useState(false);
 
   const filteredButterflies = useMemo(() => {
-    let list = butterflies;
+    let list = trueButterflies;
 
     if (selectedContinent) {
       list = list.filter((b) =>
@@ -129,7 +129,7 @@ export default function MapExplorer() {
               className="text-butterfly-ink/60 leading-relaxed max-w-xl mx-auto opacity-0 animate-fade-up"
               style={{ animationDelay: "0.2s" }}
             >
-              点击地图上的大洲，探索世界各地的特有蝴蝶。
+              点击地图上的大洲，探索世界各地分布的蝴蝶。
               从亚马逊雨林的蓝闪蝶到喜马拉雅的喙凤蝶，每一片土地都有独特的蝶舞。
             </p>
           </div>
@@ -308,7 +308,7 @@ export default function MapExplorer() {
                 </h2>
                 <p className="text-sm text-butterfly-ink/50 mt-1">
                   共找到 <span className="text-butterfly-pink-deep font-medium">{filteredButterflies.length}</span> 种
-                  {selectedCountry && <> · {selectedCountry}特有</>}
+                  {selectedCountry && <> · 分布于 {selectedCountry}</>}
                 </p>
               </div>
             </div>

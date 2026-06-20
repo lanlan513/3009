@@ -167,7 +167,7 @@ export default function Home() {
                       </h2>
                       <p className="text-butterfly-ink/60 leading-relaxed mb-6">
                         点击地图探索六大洲的蝴蝶分布，从亚马逊雨林到喜马拉雅山脉，
-                        发现每一片土地上的特有蝶种。
+                        发现每一片土地上分布的蝶种。
                       </p>
 
                       <div className="flex flex-wrap gap-2 mb-6">

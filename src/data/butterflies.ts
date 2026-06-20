@@ -516,15 +516,17 @@ export function searchButterflies(keyword: string): Butterfly[] {
 
 export const categories = [...new Set(butterflies.map((b) => b.category))];
 
+export const trueButterflies = butterflies.filter((b) => b.category !== "蛾类");
+
 export function getButterfliesByContinent(continent: Continent): Butterfly[] {
-  return butterflies.filter((b) =>
+  return trueButterflies.filter((b) =>
     b.distributionRegions.some((r) => r.continent === continent)
   );
 }
 
 export function getButterfliesByCountry(country: string): Butterfly[] {
   const lower = country.toLowerCase();
-  return butterflies.filter((b) =>
+  return trueButterflies.filter((b) =>
     b.distributionRegions.some((r) =>
       r.countries.some((c) => c.toLowerCase().includes(lower))
     )
@@ -533,7 +535,7 @@ export function getButterfliesByCountry(country: string): Butterfly[] {
 
 export function getAllCountries(): string[] {
   const countries = new Set<string>();
-  butterflies.forEach((b) => {
+  trueButterflies.forEach((b) => {
     b.distributionRegions.forEach((r) => {
       r.countries.forEach((c) => countries.add(c));
     });
@@ -543,7 +545,7 @@ export function getAllCountries(): string[] {
 
 export function getCountriesByContinent(continent: Continent): string[] {
   const countries = new Set<string>();
-  butterflies.forEach((b) => {
+  trueButterflies.forEach((b) => {
     b.distributionRegions
       .filter((r) => r.continent === continent)
       .forEach((r) => {
@@ -554,10 +556,10 @@ export function getCountriesByContinent(continent: Continent): string[] {
 }
 
 export function getButterfliesByClimate(climate: Climate): Butterfly[] {
-  return butterflies.filter((b) => b.climate.includes(climate));
+  return trueButterflies.filter((b) => b.climate.includes(climate));
 }
 
 export function getButterfliesByRarity(rarity: RarityLevel): Butterfly[] {
-  return butterflies.filter((b) => b.rarity === rarity);
+  return trueButterflies.filter((b) => b.rarity === rarity);
 }
 
