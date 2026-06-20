@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Search, Menu, X } from "lucide-react";
+import { Search, Menu, X, Globe2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ButterflyIcon from "@/components/ButterflyIcon";
 
@@ -37,6 +37,13 @@ export default function Navbar() {
             className="text-sm font-medium text-butterfly-ink/80 hover:text-butterfly-pink-deep transition-colors"
           >
             首页
+          </Link>
+          <Link
+            to="/map"
+            className="text-sm font-medium text-butterfly-ink/80 hover:text-butterfly-pink-deep transition-colors inline-flex items-center gap-1.5"
+          >
+            <Globe2 className="w-4 h-4" strokeWidth={1.8} />
+            世界地图
           </Link>
           <Link
             to="/butterflies"
@@ -87,6 +94,14 @@ export default function Navbar() {
               className="text-butterfly-ink/80 hover:text-butterfly-pink-deep py-2"
             >
               首页
+            </Link>
+            <Link
+              to="/map"
+              onClick={() => setMobileOpen(false)}
+              className="text-butterfly-ink/80 hover:text-butterfly-pink-deep py-2 inline-flex items-center gap-2"
+            >
+              <Globe2 className="w-4 h-4" strokeWidth={1.8} />
+              世界地图
             </Link>
             <Link
               to="/butterflies"
