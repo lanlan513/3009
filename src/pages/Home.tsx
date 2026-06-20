@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Sparkles, ArrowRight, Shuffle, ChevronRight, Globe2, MapPin } from "lucide-react";
+import { Sparkles, ArrowRight, Shuffle, ChevronRight, Globe2, MapPin, TreeDeciduous } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import ButterflyCard from "@/components/ButterflyCard";
 import ButterflyIcon from "@/components/ButterflyIcon";
@@ -217,6 +217,137 @@ export default function Home() {
                           </g>
                           <circle cx="200" cy="150" r="5" fill="#D28FB8" className="animate-pulse" />
                           <circle cx="200" cy="150" r="12" fill="#D28FB8" opacity="0.3" className="animate-ping" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 家族关系馆入口 */}
+      <section className="py-16 bg-cream-100 relative overflow-hidden">
+        <div
+          className="absolute -top-10 -left-10 w-64 h-64 rounded-full bg-butterfly-gold/20 blur-3xl"
+          aria-hidden
+        />
+        <div
+          className="absolute -bottom-10 -right-10 w-56 h-56 rounded-full bg-butterfly-green/20 blur-3xl"
+          aria-hidden
+        />
+
+        <div className="container relative mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <Link
+              to="/family-tree"
+              className="group block opacity-0 animate-fade-up"
+              style={{ animationDelay: "0.4s" }}
+            >
+              <div className="relative rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-cream-50 via-white to-butterfly-gold/30 border border-butterfly-gold/20 shadow-soft hover:shadow-hover transition-all duration-500 hover:-translate-y-1">
+                <div
+                  className="absolute inset-0 opacity-30 bg-grain"
+                  aria-hidden
+                />
+
+                <div className="relative p-8 md:p-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-butterfly-gold/30 text-sm text-butterfly-gold font-medium mb-5">
+                        <TreeDeciduous className="w-4 h-4" strokeWidth={1.8} />
+                        Taxonomy Explorer
+                      </div>
+
+                      <h2 className="font-display text-3xl md:text-4xl font-semibold text-butterfly-ink leading-tight mb-4">
+                        蝴蝶家族关系馆
+                      </h2>
+                      <p className="text-butterfly-ink/60 leading-relaxed mb-6">
+                        通过树状图探索蝶类的生命之树，从凤蝶科、粉蝶科到蛱蝶科，
+                        了解不同蝴蝶家族之间的分类关系和亲缘演化。
+                      </p>
+
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-butterfly-pink-light/40 text-butterfly-pink-deep">
+                          6 科
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-butterfly-green-light/40 text-butterfly-green-deep">
+                          9 亚科
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-butterfly-gold/30 text-butterfly-gold">
+                          15 属
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-butterfly-ink/10 text-butterfly-ink/70">
+                          22 种
+                        </span>
+                      </div>
+
+                      <div className="inline-flex items-center gap-2 text-butterfly-gold font-medium group-hover:gap-3 transition-all duration-300">
+                        探索家族树
+                        <ArrowRight className="w-4 h-4" strokeWidth={2} />
+                      </div>
+                    </div>
+
+                    <div className="relative">
+                      <div className="absolute -inset-4 bg-gradient-to-br from-butterfly-gold/20 via-butterfly-pink/15 to-butterfly-green/20 rounded-[2rem] blur-xl opacity-60" />
+                      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-cream-100 to-butterfly-gold/20">
+                        <svg viewBox="0 0 400 300" className="w-full h-full">
+                          <defs>
+                            <linearGradient id="treeBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stopColor="#FFFBF7" />
+                              <stop offset="100%" stopColor="#FAF0E6" />
+                            </linearGradient>
+                          </defs>
+                          <rect width="400" height="300" fill="url(#treeBg)" />
+                          
+                          <g className="animate-float" style={{ transformOrigin: "center", animationDelay: "0.5s" }}>
+                            <line x1="200" y1="50" x2="200" y2="80" stroke="#D4A574" strokeWidth="2" opacity="0.6" />
+                            <line x1="200" y1="80" x2="120" y2="120" stroke="#D4A574" strokeWidth="2" opacity="0.6" />
+                            <line x1="200" y1="80" x2="280" y2="120" stroke="#D4A574" strokeWidth="2" opacity="0.6" />
+                            
+                            <line x1="120" y1="120" x2="80" y2="170" stroke="#86B98E" strokeWidth="2" opacity="0.6" />
+                            <line x1="120" y1="120" x2="160" y2="170" stroke="#86B98E" strokeWidth="2" opacity="0.6" />
+                            <line x1="280" y1="120" x2="240" y2="170" stroke="#86B98E" strokeWidth="2" opacity="0.6" />
+                            <line x1="280" y1="120" x2="320" y2="170" stroke="#86B98E" strokeWidth="2" opacity="0.6" />
+                            
+                            <line x1="80" y1="170" x2="60" y2="220" stroke="#E8B4D4" strokeWidth="2" opacity="0.6" />
+                            <line x1="80" y1="170" x2="100" y2="220" stroke="#E8B4D4" strokeWidth="2" opacity="0.6" />
+                            <line x1="160" y1="170" x2="140" y2="220" stroke="#E8B4D4" strokeWidth="2" opacity="0.6" />
+                            <line x1="160" y1="170" x2="180" y2="220" stroke="#E8B4D4" strokeWidth="2" opacity="0.6" />
+                            <line x1="240" y1="170" x2="220" y2="220" stroke="#E8B4D4" strokeWidth="2" opacity="0.6" />
+                            <line x1="240" y1="170" x2="260" y2="220" stroke="#E8B4D4" strokeWidth="2" opacity="0.6" />
+                            <line x1="320" y1="170" x2="300" y2="220" stroke="#E8B4D4" strokeWidth="2" opacity="0.6" />
+                            <line x1="320" y1="170" x2="340" y2="220" stroke="#E8B4D4" strokeWidth="2" opacity="0.6" />
+                            
+                            <circle cx="200" cy="40" r="20" fill="#D4A574" opacity="0.9" className="animate-pulse" />
+                            <circle cx="200" cy="40" r="28" fill="#D4A574" opacity="0.3" className="animate-ping" />
+                            
+                            <circle cx="120" cy="110" r="14" fill="#86B98E" opacity="0.85" />
+                            <circle cx="280" cy="110" r="14" fill="#86B98E" opacity="0.85" />
+                            
+                            <circle cx="80" cy="160" r="10" fill="#E8B4D4" opacity="0.8" />
+                            <circle cx="160" cy="160" r="10" fill="#E8B4D4" opacity="0.8" />
+                            <circle cx="240" cy="160" r="10" fill="#E8B4D4" opacity="0.8" />
+                            <circle cx="320" cy="160" r="10" fill="#E8B4D4" opacity="0.8" />
+                            
+                            <circle cx="60" cy="220" r="7" fill="#D28FB8" opacity="0.75" />
+                            <circle cx="100" cy="220" r="7" fill="#D28FB8" opacity="0.75" />
+                            <circle cx="140" cy="220" r="7" fill="#D28FB8" opacity="0.75" />
+                            <circle cx="180" cy="220" r="7" fill="#D28FB8" opacity="0.75" />
+                            <circle cx="220" cy="220" r="7" fill="#D28FB8" opacity="0.75" />
+                            <circle cx="260" cy="220" r="7" fill="#D28FB8" opacity="0.75" />
+                            <circle cx="300" cy="220" r="7" fill="#D28FB8" opacity="0.75" />
+                            <circle cx="340" cy="220" r="7" fill="#D28FB8" opacity="0.75" />
+                            
+                            <text x="200" y="45" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">科</text>
+                            <text x="120" y="115" textAnchor="middle" fill="white" fontSize="10">亚科</text>
+                            <text x="280" y="115" textAnchor="middle" fill="white" fontSize="10">亚科</text>
+                            <text x="80" y="165" textAnchor="middle" fill="white" fontSize="9">属</text>
+                            <text x="160" y="165" textAnchor="middle" fill="white" fontSize="9">属</text>
+                            <text x="240" y="165" textAnchor="middle" fill="white" fontSize="9">属</text>
+                            <text x="320" y="165" textAnchor="middle" fill="white" fontSize="9">属</text>
+                          </g>
                         </svg>
                       </div>
                     </div>

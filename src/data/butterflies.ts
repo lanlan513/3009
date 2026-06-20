@@ -1,4 +1,4 @@
-import type { Butterfly, Continent, Climate, RarityLevel } from "@/types";
+import type { Butterfly, Continent, Climate, RarityLevel, TaxonFamily, TaxonGenus } from "@/types";
 
 const img = (prompt: string) =>
   `https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=${encodeURIComponent(prompt)}&image_size=square_hd`;
@@ -561,5 +561,270 @@ export function getButterfliesByClimate(climate: Climate): Butterfly[] {
 
 export function getButterfliesByRarity(rarity: RarityLevel): Butterfly[] {
   return trueButterflies.filter((b) => b.rarity === rarity);
+}
+
+function mapToSpecies(butterflyIds: string[]): TaxonGenus["species"] {
+  return butterflyIds
+    .map((id) => butterflies.find((b) => b.id === id))
+    .filter(Boolean)
+    .map((b) => ({
+      id: b!.id,
+      name: b!.name,
+      latinName: b!.latinName,
+      image: b!.image,
+      rarity: b!.rarity,
+      description: b!.description,
+    }));
+}
+
+export const butterflyFamilyTree: TaxonFamily[] = [
+  {
+    name: "凤蝶科",
+    latinName: "Papilionidae",
+    description: "凤蝶科是蝴蝶中最引人注目的类群之一，多数种类体型较大，色彩艳丽，后翅常带有尾突。它们飞翔姿态优美，被誉为「会飞的花朵」。",
+    characteristics: [
+      "多数种类体型较大",
+      "后翅常具燕尾状尾突",
+      "色彩艳丽，多为黄、黑、蓝、绿等色",
+      "幼虫多以芸香科、伞形科等植物为食",
+      "部分种类具有迁飞习性",
+    ],
+    subfamilies: [
+      {
+        name: "凤蝶亚科",
+        latinName: "Papilioninae",
+        description: "凤蝶亚科是凤蝶科中最大的亚科，包含了绝大多数凤蝶种类。它们多为大中型蝴蝶，色彩华丽，飞翔能力强。",
+        genera: [
+          {
+            name: "凤蝶属",
+            latinName: "Papilio",
+            description: "凤蝶属是凤蝶亚科中种类最多的属，包含了许多著名的蝴蝶种类。它们的翅膀多具有鲜艳的黄黑或蓝黑色花纹，后翅尾发达。",
+            species: mapToSpecies(["3", "6", "10", "12", "15", "17"]),
+          },
+          {
+            name: "喙凤蝶属",
+            latinName: "Teinopalpus",
+            description: "喙凤蝶属是极为珍贵的蝶类，被誉为「蝶中皇后」。它们翅膀具有华丽的金属光泽，数量稀少，属于保护物种。",
+            species: mapToSpecies(["7"]),
+          },
+          {
+            name: "珠凤蝶属",
+            latinName: "Pachliopta",
+            description: "珠凤蝶属的蝴蝶身体含有从马兜铃植物中积累的毒素，具有警戒色，常被其他蝴蝶拟态。",
+            species: mapToSpecies(["13"]),
+          },
+          {
+            name: "燕凤蝶属",
+            latinName: "Lamproptera",
+            description: "燕凤蝶属是凤蝶科中最具特色的类群之一，后翅具有两条极长的尾突，飞翔时如燕子般灵动。",
+            species: mapToSpecies(["20"]),
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "粉蝶科",
+    latinName: "Pieridae",
+    description: "粉蝶科是蝶类中数量最多的类群之一，多为中小型蝴蝶，翅膀多为白色或黄色，带有黑色斑点。它们飞行姿态轻盈，是田野和花园中最常见的蝴蝶。",
+    characteristics: [
+      "多为中小型蝴蝶",
+      "翅膀多为白色、黄色或橙色",
+      "飞行姿态轻盈敏捷",
+      "幼虫多以十字花科、豆科植物为食",
+      "部分种类具有群集迁飞习性",
+    ],
+    subfamilies: [
+      {
+        name: "粉蝶亚科",
+        latinName: "Pierinae",
+        description: "粉蝶亚科包含了绝大多数粉蝶种类，翅膀多为白色，带有黑色斑纹，是最常见的蝴蝶类群之一。",
+        genera: [
+          {
+            name: "粉蝶属",
+            latinName: "Pieris",
+            description: "粉蝶属是粉蝶亚科的代表属，其中菜粉蝶是世界上分布最广的蝴蝶之一，几乎遍及全球温带地区。",
+            species: mapToSpecies(["5"]),
+          },
+          {
+            name: "豆粉蝶属",
+            latinName: "Colias",
+            description: "豆粉蝶属的蝴蝶翅膀多呈柔和的黄色或淡绿色，喜欢在草甸和田野中活动，幼虫以豆科植物为食。",
+            species: mapToSpecies(["19"]),
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "蛱蝶科",
+    latinName: "Nymphalidae",
+    description: "蛱蝶科是蝴蝶中种类最多的一科，形态多样，色彩丰富。它们的前足退化，仅用四足行走，因此也被称为「四足蝶」。许多种类具有拟态或保护色。",
+    characteristics: [
+      "种类繁多，形态各异",
+      "前足退化，仅用四足行走",
+      "色彩丰富，多具艳丽斑纹",
+      "许多种类具有拟态或保护色",
+      "飞翔能力强，部分种类能长距离迁徙",
+    ],
+    subfamilies: [
+      {
+        name: "斑蝶亚科",
+        latinName: "Danainae",
+        description: "斑蝶亚科的蝴蝶体内含有从幼虫时期积累的毒素，具有警戒色，能有效抵御天敌。其中帝王蝶以长距离迁徙闻名于世。",
+        genera: [
+          {
+            name: "斑蝶属",
+            latinName: "Danaus",
+            description: "斑蝶属的代表是帝王蝶和虎斑蝶，它们都具有毒素，是迁徙型蝴蝶的典型代表。",
+            species: mapToSpecies(["1", "4"]),
+          },
+        ],
+      },
+      {
+        name: "闪蝶亚科",
+        latinName: "Morphinae",
+        description: "闪蝶亚科以其令人惊叹的金属光泽翅膀而闻名，这种光泽并非来自色素，而是翅膀微观结构对光线的折射作用，称为「结构色」。",
+        genera: [
+          {
+            name: "闪蝶属",
+            latinName: "Morpho",
+            description: "闪蝶属是闪蝶亚科的代表，它们的翅膀呈现梦幻般的金属蓝或银白色光泽，是热带雨林中的璀璨宝石。",
+            species: mapToSpecies(["2", "9"]),
+          },
+        ],
+      },
+      {
+        name: "蛱蝶亚科",
+        latinName: "Nymphalinae",
+        description: "蛱蝶亚科是蛱蝶科中最大的亚科，种类繁多，形态各异。许多种类具有眼斑或其他警戒图案。",
+        genera: [
+          {
+            name: "蛱蝶属",
+            latinName: "Aglais",
+            description: "蛱蝶属的代表是孔雀蛱蝶，翅膀上有四个酷似孔雀尾羽的大眼斑，用于震慑天敌。",
+            species: mapToSpecies(["8"]),
+          },
+          {
+            name: "枯叶蛱蝶属",
+            latinName: "Kallima",
+            description: "枯叶蛱蝶是自然界拟态的绝佳典范，双翅合拢时与干枯的树叶几乎一模一样。",
+            species: mapToSpecies(["21"]),
+          },
+          {
+            name: "珍蝶属",
+            latinName: "Acraea",
+            description: "珍蝶属的蝴蝶翅膀多呈半透明状，翅脉清晰如网，飞行时轻盈飘逸。",
+            species: mapToSpecies(["16"]),
+          },
+          {
+            name: "文蛱蝶属",
+            latinName: "Vindula",
+            description: "文蛱蝶属的雄蝶后翅具有优雅的长尾突，飞行姿态如巡航般悠然。",
+            species: mapToSpecies(["18"]),
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "灰蝶科",
+    latinName: "Lycaenidae",
+    description: "灰蝶科是蝴蝶中体型最小的类群，被称为「大自然的小精灵」。雄蝶翅膀正面常呈现出金属般的蓝紫色光泽，十分艳丽。",
+    characteristics: [
+      "体型小巧，多为小型蝴蝶",
+      "雄蝶翅膀常具金属蓝紫色光泽",
+      "飞行快速敏捷",
+      "部分种类与蚂蚁形成共生关系",
+      "喜停栖于日光充足之处",
+    ],
+    subfamilies: [
+      {
+        name: "灰蝶亚科",
+        latinName: "Lycaeninae",
+        description: "灰蝶亚科包含了绝大多数灰蝶种类，翅膀色彩丰富，多具有金属光泽。",
+        genera: [
+          {
+            name: "灰蝶属",
+            latinName: "Lycaena",
+            description: "灰蝶属的蝴蝶体型小巧玲珑，翅膀呈橙棕色或金属蓝紫色，在阳光下熠熠生辉。",
+            species: mapToSpecies(["11"]),
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "环蝶科",
+    latinName: "Amathusiidae",
+    description: "环蝶科多为大中型蝴蝶，翅膀多呈黄褐色或灰褐色，翅缘常具有环状或箭头状的斑纹。它们多栖息于竹林或森林中。",
+    characteristics: [
+      "多为大中型蝴蝶",
+      "翅膀多呈黄褐色或灰褐色",
+      "翅缘常具环状或箭头状斑纹",
+      "多栖息于竹林或森林环境",
+      "飞翔缓慢优雅",
+    ],
+    subfamilies: [
+      {
+        name: "环蝶亚科",
+        latinName: "Amathusiinae",
+        description: "环蝶亚科的蝴蝶体型较大，翅膀宽阔，多栖息于森林深处。",
+        genera: [
+          {
+            name: "箭环蝶属",
+            latinName: "Stichophthalma",
+            description: "箭环蝶属的代表是箭环蝶，是环蝶科中体型最大的种类之一，翅膀外缘有一排箭头状的斑纹。",
+            species: mapToSpecies(["14"]),
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "大蚕蛾科",
+    latinName: "Saturniidae",
+    description: "大蚕蛾科虽属于蛾类，但许多种类的美丽程度丝毫不逊于蝴蝶。它们体型硕大，翅膀色彩绚丽，部分种类具有长长的尾突，被誉为「凤凰蛾」。",
+    characteristics: [
+      "体型硕大，多为大型蛾类",
+      "翅膀色彩绚丽，多具眼斑",
+      "部分种类具有长长的尾突",
+      "成虫多不取食，寿命较短",
+      "具趋光性，夜间活动",
+    ],
+    subfamilies: [
+      {
+        name: "大蚕蛾亚科",
+        latinName: "Saturniinae",
+        description: "大蚕蛾亚科包含了一些最美丽的蛾类，如绿尾大蚕蛾，其飘逸的长尾巴令人过目难忘。",
+        genera: [
+          {
+            name: "尾蚕蛾属",
+            latinName: "Actias",
+            description: "尾蚕蛾属的代表是绿尾大蚕蛾，翅膀呈淡雅的苹果绿色，后翅拖着飘逸的长尾巴，被誉为「凤凰蛾」。",
+            species: mapToSpecies(["22"]),
+          },
+        ],
+      },
+    ],
+  },
+];
+
+export function getAllFamilyNames(): string[] {
+  return butterflyFamilyTree.map((f) => f.name);
+}
+
+export function getFamilyByName(name: string): TaxonFamily | undefined {
+  return butterflyFamilyTree.find(
+    (f) => f.name === name || f.latinName.toLowerCase() === name.toLowerCase()
+  );
+}
+
+export function getButterfliesByFamily(familyName: string): Butterfly[] {
+  return trueButterflies.filter((b) => b.family === familyName);
+}
+
+export function getButterfliesByGenus(genusName: string): Butterfly[] {
+  return trueButterflies.filter((b) => b.genus === genusName);
 }
 

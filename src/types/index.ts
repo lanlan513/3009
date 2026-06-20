@@ -6,6 +6,45 @@ export type Continent =
   | "亚洲"
   | "大洋洲";
 
+export interface TaxonSpecies {
+  id: string;
+  name: string;
+  latinName: string;
+  image: string;
+  rarity: RarityLevel;
+  description: string;
+}
+
+export interface TaxonGenus {
+  name: string;
+  latinName: string;
+  description: string;
+  species: TaxonSpecies[];
+}
+
+export interface TaxonSubfamily {
+  name: string;
+  latinName: string;
+  description: string;
+  genera: TaxonGenus[];
+}
+
+export interface TaxonFamily {
+  name: string;
+  latinName: string;
+  description: string;
+  characteristics: string[];
+  subfamilies: TaxonSubfamily[];
+}
+
+export type TaxonNode = TaxonFamily | TaxonSubfamily | TaxonGenus | TaxonSpecies;
+
+export interface BreadcrumbItem {
+  level: "family" | "subfamily" | "genus" | "species";
+  name: string;
+  latinName?: string;
+}
+
 export type Climate =
   | "热带"
   | "亚热带"
