@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Sparkles, ArrowRight, Shuffle, ChevronRight, Globe2, MapPin, TreeDeciduous, Layers, BookOpen, Gem, Flame, GitCompare, Ruler, Palette, ShieldAlert } from "lucide-react";
+import { Sparkles, ArrowRight, Shuffle, ChevronRight, Globe2, MapPin, TreeDeciduous, Layers, BookOpen, Gem, Flame, GitCompare, Ruler, Palette, ShieldAlert, Calendar, Navigation } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import ButterflyCard from "@/components/ButterflyCard";
 import ButterflyIcon from "@/components/ButterflyIcon";
@@ -730,6 +730,158 @@ export default function Home() {
               <ShieldAlert className="w-4 h-4" strokeWidth={2} />
               进入珍稀蝴蝶档案库
               <ArrowRight className="w-4 h-4" strokeWidth={2} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 观察季历入口 */}
+      <section className="py-16 bg-cream-50 relative overflow-hidden">
+        <div
+          className="absolute -top-10 -right-10 w-64 h-64 rounded-full bg-butterfly-gold/20 blur-3xl"
+          aria-hidden
+        />
+        <div
+          className="absolute -bottom-10 -left-10 w-56 h-56 rounded-full bg-butterfly-pink/20 blur-3xl"
+          aria-hidden
+        />
+
+        <div className="container relative mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <Link
+              to="/observation-calendar"
+              className="group block opacity-0 animate-fade-up"
+              style={{ animationDelay: "0.4s" }}
+            >
+              <div className="relative rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-cream-50 via-white to-butterfly-gold/30 border border-butterfly-gold/20 shadow-soft hover:shadow-hover transition-all duration-500 hover:-translate-y-1">
+                <div
+                  className="absolute inset-0 opacity-30 bg-grain"
+                  aria-hidden
+                />
+
+                <div className="relative p-8 md:p-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-butterfly-gold/30 text-sm text-butterfly-gold font-medium mb-5">
+                        <Calendar className="w-4 h-4" strokeWidth={1.8} />
+                        Seasonal Guide
+                      </div>
+
+                      <h2 className="font-display text-3xl md:text-4xl font-semibold text-butterfly-ink leading-tight mb-4">
+                        蝴蝶观察季历
+                      </h2>
+                      <p className="text-butterfly-ink/60 leading-relaxed mb-6">
+                        跟随季节的脚步，探索每月最值得观察的蝴蝶。
+                        了解不同地区的最佳观蝶时节，掌握生命周期与迁徙规律。
+                      </p>
+
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-butterfly-pink-light/40 text-butterfly-pink-deep">
+                          <Sparkles className="w-3 h-3" strokeWidth={2} />
+                          当月蝶讯
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-butterfly-green-light/40 text-butterfly-green-deep">
+                          <Globe2 className="w-3 h-3" strokeWidth={2} />
+                          地区指南
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-butterfly-gold/30 text-butterfly-gold">
+                          <Navigation className="w-3 h-3" strokeWidth={2} />
+                          迁徙追踪
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-butterfly-ink/10 text-butterfly-ink/70">
+                          全年指南
+                        </span>
+                      </div>
+
+                      <div className="inline-flex items-center gap-2 text-butterfly-gold font-medium group-hover:gap-3 transition-all duration-300">
+                        查看季历
+                        <ArrowRight className="w-4 h-4" strokeWidth={2} />
+                      </div>
+                    </div>
+
+                    <div className="relative">
+                      <div className="absolute -inset-4 bg-gradient-to-br from-butterfly-gold/20 via-butterfly-pink/15 to-butterfly-green/20 rounded-[2rem] blur-xl opacity-60" />
+                      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-cream-100 to-butterfly-gold/20">
+                        <svg viewBox="0 0 400 300" className="w-full h-full">
+                          <defs>
+                            <linearGradient id="calBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stopColor="#FFFBF7" />
+                              <stop offset="100%" stopColor="#FEF3C7" />
+                            </linearGradient>
+                          </defs>
+                          <rect width="400" height="300" fill="url(#calBg)" />
+                          
+                          <g className="animate-float" style={{ transformOrigin: "center" }}>
+                            <rect x="50" y="40" width="300" height="220" rx="16" fill="white" stroke="#FDE68A" strokeWidth="2" opacity="0.9" />
+                            
+                            <rect x="50" y="40" width="300" height="50" rx="16" fill="#F59E0B" opacity="0.85" />
+                            <text x="200" y="72" textAnchor="middle" fill="white" fontSize="18" fontWeight="bold" fontFamily="serif">
+                              六月
+                            </text>
+                            
+                            <g transform="translate(65, 100)">
+                              {[0, 1, 2, 3, 4, 5, 6].map((i) => (
+                                <text key={i} x={i * 40 + 15} y="0" textAnchor="middle" fill="#D4A574" fontSize="10" fontWeight="500">
+                                  {["日", "一", "二", "三", "四", "五", "六"][i]}
+                                </text>
+                              ))}
+                            </g>
+                            
+                            <g transform="translate(65, 120)">
+                              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((day, i) => {
+                                const row = Math.floor(i / 7);
+                                const col = i % 7;
+                                const isSpecial = day === 5 || day === 12;
+                                return (
+                                  <g key={day}>
+                                    <circle
+                                      cx={col * 40 + 15}
+                                      cy={row * 32 + 12}
+                                      r={isSpecial ? 14 : 0}
+                                      fill={isSpecial ? "#F5D9E8" : "none"}
+                                      opacity={isSpecial ? 0.6 : 0}
+                                      className={isSpecial ? "animate-pulse" : ""}
+                                    />
+                                    <text
+                                      x={col * 40 + 15}
+                                      y={row * 32 + 16}
+                                      textAnchor="middle"
+                                      fill={isSpecial ? "#D28FB8" : "#8B7355"}
+                                      fontSize="11"
+                                      fontWeight={isSpecial ? "bold" : "normal"}
+                                    >
+                                      {day}
+                                    </text>
+                                  </g>
+                                );
+                              })}
+                            </g>
+                            
+                            <g transform="translate(80, 210)" className="animate-flutter" style={{ transformOrigin: "center" }}>
+                              <ellipse cx="0" cy="0" rx="18" ry="10" fill="#E8B4D4" opacity="0.7" transform="rotate(-20)" />
+                              <ellipse cx="0" cy="0" rx="18" ry="10" fill="#E8B4D4" opacity="0.7" transform="rotate(20)" />
+                              <ellipse cx="0" cy="0" rx="3" ry="8" fill="#D28FB8" />
+                            </g>
+                            <g transform="translate(310, 220)" className="animate-flutter" style={{ transformOrigin: "center", animationDelay: "1s" }}>
+                              <ellipse cx="0" cy="0" rx="14" ry="8" fill="#B7D9BC" opacity="0.7" transform="rotate(-15)" />
+                              <ellipse cx="0" cy="0" rx="14" ry="8" fill="#B7D9BC" opacity="0.7" transform="rotate(15)" />
+                              <ellipse cx="0" cy="0" rx="2" ry="6" fill="#86B98E" />
+                            </g>
+                            <g transform="translate(200, 200)" className="animate-flutter" style={{ transformOrigin: "center", animationDelay: "0.5s" }}>
+                              <ellipse cx="0" cy="0" rx="12" ry="7" fill="#FDE68A" opacity="0.8" transform="rotate(-25)" />
+                              <ellipse cx="0" cy="0" rx="12" ry="7" fill="#FDE68A" opacity="0.8" transform="rotate(25)" />
+                              <ellipse cx="0" cy="0" rx="2" ry="5" fill="#D4A574" />
+                            </g>
+                            
+                            <circle cx="200" cy="165" r="8" fill="#D28FB8" opacity="0.9" className="animate-pulse" />
+                            <circle cx="200" cy="165" r="16" fill="#D28FB8" opacity="0.3" className="animate-ping" />
+                          </g>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </Link>
           </div>
         </div>

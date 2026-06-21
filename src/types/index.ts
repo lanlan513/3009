@@ -355,3 +355,83 @@ export interface WingPattern {
   identificationTips: string[];
   overallDescription: string;
 }
+
+export type Season = "春" | "夏" | "秋" | "冬";
+
+export type MonthNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+
+export interface ObservationTip {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+export interface MonthlyButterfly {
+  butterflyId: string;
+  highlight: string;
+  abundance: "极多" | "较多" | "常见" | "较少" | "稀有";
+  lifeStage: "卵期" | "幼虫期" | "蛹期" | "成虫期" | "全年可见";
+  observationNote?: string;
+}
+
+export interface MigrationInfo {
+  butterflyId: string;
+  butterflyName: string;
+  fromRegion: string;
+  toRegion: string;
+  startMonth: MonthNumber;
+  endMonth: MonthNumber;
+  duration: string;
+  distance: string;
+  description: string;
+}
+
+export interface RegionalSeasonInfo {
+  region: string;
+  continent: Continent;
+  bestMonths: MonthNumber[];
+  peakSeason: string;
+  butterflyCount: number;
+  highlights: string[];
+  climate: string;
+}
+
+export interface MonthData {
+  month: MonthNumber;
+  monthName: string;
+  season: Season;
+  theme: string;
+  description: string;
+  colorTheme: string;
+  commonButterflies: MonthlyButterfly[];
+  rareButterflies: MonthlyButterfly[];
+  tips: ObservationTip[];
+  bestRegions: string[];
+  averageTemperature: string;
+  daylightHours: string;
+}
+
+export interface ObservationGuide {
+  id: string;
+  title: string;
+  subtitle: string;
+  category: "季节观察" | "地区指南" | "生命周期" | "迁徙追踪" | "新手入门";
+  icon: string;
+  content: string;
+  keyPoints: string[];
+  bestTime?: string;
+  bestLocation?: string;
+  difficulty: "入门" | "进阶" | "专家";
+}
+
+export interface SeasonalPattern {
+  butterflyId: string;
+  butterflyName: string;
+  adultMonths: MonthNumber[];
+  larvaMonths: MonthNumber[];
+  pupaMonths: MonthNumber[];
+  eggMonths: MonthNumber[];
+  generationsPerYear: number;
+  overwinteringStage: "卵" | "幼虫" | "蛹" | "成虫" | "不越冬";
+  region: string;
+}
