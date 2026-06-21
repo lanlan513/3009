@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Search, Menu, X, Globe2, TreeDeciduous, Wind, Layers, GitCompare, Clock } from "lucide-react";
+import { Search, Menu, X, Globe2, TreeDeciduous, Wind, Layers, GitCompare, Clock, ShieldAlert } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ButterflyIcon from "@/components/ButterflyIcon";
 
@@ -79,6 +79,13 @@ export default function Navbar() {
           >
             <Clock className="w-4 h-4" strokeWidth={1.8} />
             发现长廊
+          </Link>
+          <Link
+            to="/rare-archive"
+            className="text-sm font-medium text-butterfly-ink/80 hover:text-butterfly-pink-deep transition-colors inline-flex items-center gap-1.5"
+          >
+            <ShieldAlert className="w-4 h-4" strokeWidth={1.8} />
+            珍稀档案
           </Link>
           <Link
             to="/butterflies"
@@ -177,6 +184,14 @@ export default function Navbar() {
             >
               <Clock className="w-4 h-4" strokeWidth={1.8} />
               发现长廊
+            </Link>
+            <Link
+              to="/rare-archive"
+              onClick={() => setMobileOpen(false)}
+              className="text-butterfly-ink/80 hover:text-butterfly-pink-deep py-2 inline-flex items-center gap-2"
+            >
+              <ShieldAlert className="w-4 h-4" strokeWidth={1.8} />
+              珍稀档案
             </Link>
             <Link
               to="/butterflies"

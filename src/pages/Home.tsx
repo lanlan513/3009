@@ -1,11 +1,12 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Sparkles, ArrowRight, Shuffle, ChevronRight, Globe2, MapPin, TreeDeciduous, Layers, BookOpen, Gem, Flame, GitCompare, Ruler, Palette } from "lucide-react";
+import { Sparkles, ArrowRight, Shuffle, ChevronRight, Globe2, MapPin, TreeDeciduous, Layers, BookOpen, Gem, Flame, GitCompare, Ruler, Palette, ShieldAlert } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import ButterflyCard from "@/components/ButterflyCard";
 import ButterflyIcon from "@/components/ButterflyIcon";
 import ButterflyLifecycle from "@/components/ButterflyLifecycle";
 import { getPopularButterflies, getRandomButterflies, categories, continents } from "@/data/butterflies";
+import { rareButterflies } from "@/data/rareButterflies";
 import { cn } from "@/lib/utils";
 
 export default function Home() {
@@ -630,6 +631,106 @@ export default function Home() {
                 />
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 珍稀物种专题 */}
+      <section className="py-16 bg-cream-100 relative overflow-hidden">
+        <div
+          className="absolute -top-10 -left-10 w-64 h-64 rounded-full bg-rose-200/30 blur-3xl"
+          aria-hidden
+        />
+        <div
+          className="absolute -bottom-10 -right-10 w-56 h-56 rounded-full bg-amber-200/30 blur-3xl"
+          aria-hidden
+        />
+
+        <div className="container relative mx-auto px-4">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="text-sm text-rose-600 font-medium tracking-wide uppercase mb-2 flex items-center gap-1.5">
+                <ShieldAlert className="w-4 h-4" strokeWidth={2} />
+                Rare Species
+              </p>
+              <h2 className="font-display text-3xl md:text-4xl font-semibold text-butterfly-ink">
+                珍稀物种专题 · 守护蝶之未来
+              </h2>
+            </div>
+            <Link
+              to="/rare-archive"
+              className="hidden sm:inline-flex items-center gap-1 text-sm text-rose-600 hover:text-rose-700 font-medium"
+            >
+              查看全部
+              <ArrowRight className="w-4 h-4" strokeWidth={2} />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {rareButterflies.slice(0, 6).map((b, i) => (
+              <Link
+                key={b.id}
+                to={`/rare-butterfly/${b.id}`}
+                className="group block rounded-3xl overflow-hidden bg-white shadow-card card-hover opacity-0 animate-fade-up"
+                style={{ animationDelay: `${i * 80}ms` }}
+              >
+                <div className="relative h-44 overflow-hidden">
+                  <img
+                    src={b.image}
+                    alt={b.name}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+                  <div className="absolute top-3 left-3">
+                    <span className={cn(
+                      "inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold border backdrop-blur-sm",
+                      b.conservationStatus === "濒危" ? "bg-red-100 text-red-700 border-red-200" :
+                      b.conservationStatus === "极危" ? "bg-rose-100 text-rose-800 border-rose-200" :
+                      b.conservationStatus === "易危" ? "bg-orange-100 text-orange-700 border-orange-200" :
+                      "bg-yellow-100 text-yellow-700 border-yellow-200"
+                    )}>
+                      {b.conservationStatus}
+                    </span>
+                  </div>
+                  {b.isEndemic && (
+                    <div className="absolute top-3 right-3">
+                      <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-amber-500/90 text-white text-[10px] font-semibold backdrop-blur-sm">
+                        <MapPin className="w-3 h-3" strokeWidth={2} />
+                        特有种
+                      </span>
+                    </div>
+                  )}
+                  <div className="absolute bottom-3 left-3 right-3 text-white">
+                    <p className="font-display text-lg font-semibold">{b.name}</p>
+                    <p className="text-xs opacity-80 font-serif italic">{b.latinName}</p>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <p className="text-sm text-butterfly-ink/70 line-clamp-2 leading-relaxed mb-3">
+                    {b.description}
+                  </p>
+                  <div className="flex items-center justify-between text-xs text-butterfly-ink/50">
+                    <span>{b.family}</span>
+                    <span className="text-rose-600 font-medium group-hover:text-rose-700 inline-flex items-center gap-1 transition-colors">
+                      了解保育详情
+                      <ChevronRight className="w-3.5 h-3.5" strokeWidth={2} />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Link
+              to="/rare-archive"
+              className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-rose-600 text-white font-medium shadow-soft hover:shadow-hover hover:-translate-y-0.5 transition-all duration-300"
+            >
+              <ShieldAlert className="w-4 h-4" strokeWidth={2} />
+              进入珍稀蝴蝶档案库
+              <ArrowRight className="w-4 h-4" strokeWidth={2} />
+            </Link>
           </div>
         </div>
       </section>

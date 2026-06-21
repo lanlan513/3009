@@ -229,6 +229,64 @@ export interface DiscoveryEvent {
   category: "物种发现" | "分类学突破" | "迁徙研究" | "保护里程碑" | "探索远征";
 }
 
+export type ConservationStatus = "无危" | "近危" | "易危" | "濒危" | "极危" | "野外灭绝" | "灭绝";
+
+export type ThreatCategory = "栖息地丧失" | "气候变化" | "非法采集" | "农药污染" | "外来物种入侵" | "过度开发" | "疾病" | "光污染" | "火山活动";
+
+export interface PopulationStatus {
+  estimatedPopulation: string;
+  trend: "上升" | "稳定" | "下降" | "急剧下降" | "未知";
+  lastAssessment: string;
+  assessmentSource: string;
+}
+
+export interface ThreatFactor {
+  category: ThreatCategory;
+  severity: "低" | "中" | "高" | "极高";
+  description: string;
+}
+
+export interface ConservationMeasure {
+  title: string;
+  description: string;
+  type: "法律保护" | "栖息地恢复" | "人工繁育" | "科学研究" | "公众教育" | "国际合作";
+  status: "已实施" | "进行中" | "规划中";
+}
+
+export interface ConservationRegion {
+  name: string;
+  continent: Continent;
+  country: string;
+  description: string;
+  keySpecies: string[];
+  conservationEfforts: string[];
+  challenges: string[];
+}
+
+export interface RareButterfly {
+  id: string;
+  name: string;
+  latinName: string;
+  family: string;
+  genus: string;
+  image: string;
+  description: string;
+  distribution: string;
+  distributionRegions: DistributionRegion[];
+  wingspan: string;
+  habitat: string;
+  climate: Climate[];
+  rarity: RarityLevel;
+  conservationStatus: ConservationStatus;
+  isEndemic: boolean;
+  endemicRegion?: string;
+  features: string[];
+  population: PopulationStatus;
+  threats: ThreatFactor[];
+  conservationMeasures: ConservationMeasure[];
+  relatedButterflyId?: string;
+}
+
 export interface EraInfo {
   id: string;
   name: string;
