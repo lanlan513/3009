@@ -14,6 +14,10 @@ import {
   ThermometerSun,
   ShieldAlert,
   Globe2,
+  Wind,
+  Clock,
+  Mountain,
+  Zap,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import ButterflyCard from "@/components/ButterflyCard";
@@ -316,6 +320,131 @@ export default function ButterflyDetail() {
                       <p className="text-sm text-butterfly-ink/80 leading-relaxed">{f}</p>
                     </div>
                   ))}
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-butterfly-pink-light/20 via-white to-butterfly-green-light/20 rounded-3xl p-7 border border-butterfly-pink/20 shadow-soft opacity-0 animate-fade-up" style={{ animationDelay: "0.75s" }}>
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-9 h-9 rounded-xl bg-butterfly-pink-light/50 flex items-center justify-center">
+                      <Wind className="w-5 h-5 text-butterfly-pink-deep" strokeWidth={1.8} />
+                    </div>
+                    <h2 className="font-display text-2xl font-semibold text-butterfly-ink">
+                      飞行习性
+                    </h2>
+                  </div>
+                  <Link
+                    to={`/flight-observation?ids=${butterfly.id}`}
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-butterfly-pink-deep text-white text-sm font-medium hover:shadow-soft transition-all"
+                  >
+                    <Wind className="w-4 h-4" strokeWidth={1.8} />
+                    查看飞行动画
+                    <ChevronRight className="w-4 h-4" strokeWidth={2} />
+                  </Link>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-white/60 rounded-2xl p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-8 h-8 rounded-xl bg-butterfly-pink-light/40 flex items-center justify-center">
+                        <Wind className="w-4 h-4 text-butterfly-pink-deep" strokeWidth={1.8} />
+                      </div>
+                      <span className="text-sm font-medium text-butterfly-ink">飞行模式</span>
+                    </div>
+                    <p className="text-lg font-semibold text-butterfly-pink-deep mb-2">
+                      {butterfly.flight.pattern.patternType}
+                    </p>
+                    <p className="text-sm text-butterfly-ink/70 leading-relaxed">
+                      {butterfly.flight.pattern.description}
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-butterfly-pink-light/30">
+                        <Zap className="w-3.5 h-3.5 text-butterfly-pink-deep" strokeWidth={1.8} />
+                        <span className="text-xs font-medium text-butterfly-pink-deep">
+                          速度 {butterfly.flight.pattern.speed}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-butterfly-green-light/30">
+                        <Sparkles className="w-3.5 h-3.5 text-butterfly-green-deep" strokeWidth={1.8} />
+                        <span className="text-xs font-medium text-butterfly-green-deep">
+                          敏捷 {butterfly.flight.pattern.agility}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white/60 rounded-2xl p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-8 h-8 rounded-xl bg-butterfly-green-light/40 flex items-center justify-center">
+                        <Clock className="w-4 h-4 text-butterfly-green-deep" strokeWidth={1.8} />
+                      </div>
+                      <span className="text-sm font-medium text-butterfly-ink">活动时间</span>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5 mb-3">
+                      {butterfly.flight.activity.activeTime.map((t) => (
+                        <span
+                          key={t}
+                          className="px-2.5 py-1 rounded-full bg-butterfly-green-light/30 text-xs font-medium text-butterfly-green-deep"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="text-sm text-butterfly-ink/70 leading-relaxed">
+                      {butterfly.flight.activity.description}
+                    </p>
+                    <p className="text-xs text-butterfly-ink/50 mt-2">
+                      翅振频率：{butterfly.flight.pattern.wingbeatFrequency}
+                    </p>
+                  </div>
+
+                  <div className="bg-white/60 rounded-2xl p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-8 h-8 rounded-xl bg-amber-100 flex items-center justify-center">
+                        <Mountain className="w-4 h-4 text-amber-600" strokeWidth={1.8} />
+                      </div>
+                      <span className="text-sm font-medium text-butterfly-ink">飞行高度</span>
+                    </div>
+                    <p className="text-lg font-semibold text-amber-700 mb-2">
+                      {butterfly.flight.altitude.preferredAltitude}
+                    </p>
+                    <p className="text-sm text-butterfly-ink/70 leading-relaxed">
+                      {butterfly.flight.altitude.description}
+                    </p>
+                    <div className="mt-3">
+                      <p className="text-xs text-butterfly-ink/50 mb-1">
+                        活动范围：{butterfly.flight.altitude.minAltitude} - {butterfly.flight.altitude.maxAltitude} 米
+                      </p>
+                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-gradient-to-r from-amber-400 to-amber-600 rounded-full"
+                          style={{
+                            width: `${(butterfly.flight.altitude.maxAltitude / 50) * 100}%`,
+                            marginLeft: `${(butterfly.flight.altitude.minAltitude / 50) * 100}%`,
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white/60 rounded-2xl p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-8 h-8 rounded-xl bg-purple-100 flex items-center justify-center">
+                        <Sparkles className="w-4 h-4 text-purple-600" strokeWidth={1.8} />
+                      </div>
+                      <span className="text-sm font-medium text-butterfly-ink">飞行习性</span>
+                    </div>
+                    <div className="space-y-2">
+                      {butterfly.flight.habits.map((habit, i) => (
+                        <div key={i} className="flex items-start gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-2 flex-shrink-0" />
+                          <p className="text-sm text-butterfly-ink/70 leading-relaxed">
+                            {habit}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

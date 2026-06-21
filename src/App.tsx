@@ -4,6 +4,7 @@ import ButterflyList from "@/pages/ButterflyList";
 import ButterflyDetail from "@/pages/ButterflyDetail";
 import MapExplorer from "@/pages/MapExplorer";
 import FamilyTree from "@/pages/FamilyTree";
+import FlightObservation from "@/pages/FlightObservation";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/butterflies" element={<ButterflyList />} />
         <Route path="/butterfly/:id" element={<ButterflyDetail />} />
         <Route path="/family-tree" element={<FamilyTree />} />
+        <Route path="/flight-observation" element={<FlightObservation />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>

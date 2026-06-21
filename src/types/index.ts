@@ -55,6 +55,77 @@ export type Climate =
 
 export type RarityLevel = "常见" | "较常见" | "稀有" | "极稀有" | "濒危";
 
+export type FlightPatternType =
+  | "直线滑翔"
+  | "波浪起伏"
+  | "快速穿梭"
+  | "优雅盘旋"
+  | "飘忽不定"
+  | "缓慢漂浮"
+  | "敏捷跳跃";
+
+export type ActivityTimeType =
+  | "清晨活跃"
+  | "上午活跃"
+  | "中午活跃"
+  | "下午活跃"
+  | "黄昏活跃"
+  | "全天活跃"
+  | "傍晚活跃";
+
+export type FlightHabitatType =
+  | "林冠层"
+  | "林缘地带"
+  | "开阔草地"
+  | "花丛低空"
+  | "溪流沿岸"
+  | "山顶高空"
+  | "竹林木中";
+
+export interface FlightPattern {
+  patternType: FlightPatternType;
+  description: string;
+  speed: number;
+  agility: number;
+  wingbeatFrequency: string;
+}
+
+export interface FlightActivity {
+  activeTime: ActivityTimeType[];
+  description: string;
+  flightDuration: string;
+  seasonalPattern: string;
+}
+
+export interface FlightAltitude {
+  habitat: FlightHabitatType;
+  minAltitude: number;
+  maxAltitude: number;
+  preferredAltitude: string;
+  description: string;
+}
+
+export interface FlightTrackPoint {
+  x: number;
+  y: number;
+  t: number;
+}
+
+export interface FlightTrajectory {
+  pattern: FlightPatternType;
+  points: FlightTrackPoint[];
+  duration: number;
+  scale: number;
+}
+
+export interface FlightInfo {
+  pattern: FlightPattern;
+  activity: FlightActivity;
+  altitude: FlightAltitude;
+  trajectory: FlightTrajectory;
+  habits: string[];
+}
+
 export interface DistributionRegion {
   continent: Continent;
   countries: string[];
@@ -77,4 +148,5 @@ export interface Butterfly {
   rarity: RarityLevel;
   features: string[];
   popularity: number;
+  flight: FlightInfo;
 }

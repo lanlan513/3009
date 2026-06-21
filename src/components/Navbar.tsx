@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Search, Menu, X, Globe2, TreeDeciduous } from "lucide-react";
+import { Search, Menu, X, Globe2, TreeDeciduous, Wind } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ButterflyIcon from "@/components/ButterflyIcon";
 
@@ -51,6 +51,13 @@ export default function Navbar() {
           >
             <TreeDeciduous className="w-4 h-4" strokeWidth={1.8} />
             家族关系
+          </Link>
+          <Link
+            to="/flight-observation"
+            className="text-sm font-medium text-butterfly-ink/80 hover:text-butterfly-pink-deep transition-colors inline-flex items-center gap-1.5"
+          >
+            <Wind className="w-4 h-4" strokeWidth={1.8} />
+            飞行观察
           </Link>
           <Link
             to="/butterflies"
@@ -117,6 +124,14 @@ export default function Navbar() {
             >
               <TreeDeciduous className="w-4 h-4" strokeWidth={1.8} />
               家族关系
+            </Link>
+            <Link
+              to="/flight-observation"
+              onClick={() => setMobileOpen(false)}
+              className="text-butterfly-ink/80 hover:text-butterfly-pink-deep py-2 inline-flex items-center gap-2"
+            >
+              <Wind className="w-4 h-4" strokeWidth={1.8} />
+              飞行观察
             </Link>
             <Link
               to="/butterflies"
