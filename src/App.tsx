@@ -8,6 +8,7 @@ import FlightObservation from "@/pages/FlightObservation";
 import SpecimenMuseum from "@/pages/SpecimenMuseum";
 import SpecimenDetail from "@/pages/SpecimenDetail";
 import ButterflyCompareLab from "@/pages/ButterflyCompareLab";
+import DiscoveryTimeline from "@/pages/DiscoveryTimeline";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/specimen-museum" element={<SpecimenMuseum />} />
         <Route path="/specimen/:id" element={<SpecimenDetail />} />
         <Route path="/compare-lab" element={<ButterflyCompareLab />} />
+        <Route path="/discovery-timeline" element={<DiscoveryTimeline />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>

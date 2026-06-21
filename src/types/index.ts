@@ -194,3 +194,46 @@ export interface Specimen {
   tags: string[];
   relatedButterflyId?: string;
 }
+
+export interface DiscoveryLocation {
+  name: string;
+  continent: Continent;
+  country: string;
+  x: number;
+  y: number;
+}
+
+export interface ExplorationRoute {
+  from: DiscoveryLocation;
+  to: DiscoveryLocation;
+  year: number;
+  description: string;
+}
+
+export interface DiscoveryEvent {
+  id: string;
+  year: number;
+  yearDisplay: string;
+  era: string;
+  title: string;
+  description: string;
+  butterflyName?: string;
+  butterflyLatinName?: string;
+  butterflyImage?: string;
+  discoverer: string;
+  discovererBio?: string;
+  location: DiscoveryLocation;
+  significance: string;
+  image?: string;
+  tags: string[];
+  category: "物种发现" | "分类学突破" | "迁徙研究" | "保护里程碑" | "探索远征";
+}
+
+export interface EraInfo {
+  id: string;
+  name: string;
+  startYear: number;
+  endYear: number;
+  description: string;
+  color: string;
+}
