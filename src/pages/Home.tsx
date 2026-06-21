@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Sparkles, ArrowRight, Shuffle, ChevronRight, Globe2, MapPin, TreeDeciduous } from "lucide-react";
+import { Sparkles, ArrowRight, Shuffle, ChevronRight, Globe2, MapPin, TreeDeciduous, Layers, BookOpen, Gem, Flame } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import ButterflyCard from "@/components/ButterflyCard";
 import ButterflyIcon from "@/components/ButterflyIcon";
@@ -347,6 +347,121 @@ export default function Home() {
                             <text x="160" y="165" textAnchor="middle" fill="white" fontSize="9">属</text>
                             <text x="240" y="165" textAnchor="middle" fill="white" fontSize="9">属</text>
                             <text x="320" y="165" textAnchor="middle" fill="white" fontSize="9">属</text>
+                          </g>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 标本博物馆入口 */}
+      <section className="py-16 bg-cream-50 relative overflow-hidden">
+        <div
+          className="absolute -top-10 -right-10 w-64 h-64 rounded-full bg-amber-200/30 blur-3xl"
+          aria-hidden
+        />
+        <div
+          className="absolute -bottom-10 -left-10 w-56 h-56 rounded-full bg-rose-200/30 blur-3xl"
+          aria-hidden
+        />
+
+        <div className="container relative mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <Link
+              to="/specimen-museum"
+              className="group block opacity-0 animate-fade-up"
+              style={{ animationDelay: "0.5s" }}
+            >
+              <div className="relative rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-cream-50 via-white to-amber-100/40 border border-amber-200/30 shadow-soft hover:shadow-hover transition-all duration-500 hover:-translate-y-1">
+                <div
+                  className="absolute inset-0 opacity-30 bg-grain"
+                  aria-hidden
+                />
+
+                <div className="relative p-8 md:p-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100 text-sm text-amber-700 font-medium mb-5">
+                        <Layers className="w-4 h-4" strokeWidth={1.8} />
+                        Digital Museum
+                      </div>
+
+                      <h2 className="font-display text-3xl md:text-4xl font-semibold text-butterfly-ink leading-tight mb-4">
+                        蝴蝶标本数字博物馆
+                      </h2>
+                      <p className="text-butterfly-ink/60 leading-relaxed mb-6">
+                        收录历史标本、珍稀物种和已灭绝近缘种资料。通过3D展示页面旋转查看标本细节，
+                        了解每件标本背后的发现历史和研究记录。
+                      </p>
+
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-amber-100 text-amber-700">
+                          <BookOpen className="w-3 h-3" strokeWidth={2} />
+                          历史标本
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-emerald-100 text-emerald-700">
+                          <Gem className="w-3 h-3" strokeWidth={2} />
+                          珍稀物种
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-rose-100 text-rose-700">
+                          <Flame className="w-3 h-3" strokeWidth={2} />
+                          已灭绝近缘种
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-butterfly-ink/10 text-butterfly-ink/70">
+                          3D 旋转展示
+                        </span>
+                      </div>
+
+                      <div className="inline-flex items-center gap-2 text-amber-700 font-medium group-hover:gap-3 transition-all duration-300">
+                        进入标本馆
+                        <ArrowRight className="w-4 h-4" strokeWidth={2} />
+                      </div>
+                    </div>
+
+                    <div className="relative">
+                      <div className="absolute -inset-4 bg-gradient-to-br from-amber-200/30 via-rose-200/20 to-emerald-200/30 rounded-[2rem] blur-xl opacity-60" />
+                      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-cream-100 to-amber-50">
+                        <svg viewBox="0 0 400 300" className="w-full h-full">
+                          <defs>
+                            <linearGradient id="museumBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stopColor="#FFFBF7" />
+                              <stop offset="100%" stopColor="#FEF3C7" />
+                            </linearGradient>
+                          </defs>
+                          <rect width="400" height="300" fill="url(#museumBg)" />
+                          
+                          <g className="animate-float" style={{ transformOrigin: "center", animationDelay: "0.5s" }}>
+                            <rect x="50" y="40" width="300" height="220" rx="12" fill="#FDF6E3" stroke="#E8D5B7" strokeWidth="2" opacity="0.8" />
+                            
+                            <rect x="70" y="60" width="80" height="80" rx="8" fill="white" stroke="#D4B896" strokeWidth="1.5" />
+                            <rect x="160" y="60" width="80" height="80" rx="8" fill="white" stroke="#D4B896" strokeWidth="1.5" />
+                            <rect x="250" y="60" width="80" height="80" rx="8" fill="white" stroke="#D4B896" strokeWidth="1.5" />
+                            
+                            <rect x="70" y="150" width="80" height="80" rx="8" fill="white" stroke="#D4B896" strokeWidth="1.5" />
+                            <rect x="160" y="150" width="80" height="80" rx="8" fill="white" stroke="#D4B896" strokeWidth="1.5" />
+                            <rect x="250" y="150" width="80" height="80" rx="8" fill="white" stroke="#D4B896" strokeWidth="1.5" />
+                            
+                            <ellipse cx="110" cy="100" rx="25" ry="15" fill="#E8B4D4" opacity="0.6" transform="rotate(-20 110 100)" />
+                            <ellipse cx="110" cy="100" rx="25" ry="15" fill="#E8B4D4" opacity="0.6" transform="rotate(20 110 100)" />
+                            <ellipse cx="200" cy="100" rx="30" ry="18" fill="#86B98E" opacity="0.6" transform="rotate(-15 200 100)" />
+                            <ellipse cx="200" cy="100" rx="30" ry="18" fill="#86B98E" opacity="0.6" transform="rotate(15 200 100)" />
+                            <ellipse cx="290" cy="100" rx="28" ry="16" fill="#D4A574" opacity="0.6" transform="rotate(-25 290 100)" />
+                            <ellipse cx="290" cy="100" rx="28" ry="16" fill="#D4A574" opacity="0.6" transform="rotate(25 290 100)" />
+                            
+                            <ellipse cx="110" cy="190" rx="22" ry="13" fill="#D28FB8" opacity="0.5" transform="rotate(-10 110 190)" />
+                            <ellipse cx="110" cy="190" rx="22" ry="13" fill="#D28FB8" opacity="0.5" transform="rotate(10 110 190)" />
+                            <ellipse cx="200" cy="190" rx="35" ry="20" fill="#B4D4E8" opacity="0.5" />
+                            <ellipse cx="290" cy="190" rx="24" ry="14" fill="#E8C4B4" opacity="0.5" transform="rotate(-30 290 190)" />
+                            <ellipse cx="290" cy="190" rx="24" ry="14" fill="#E8C4B4" opacity="0.5" transform="rotate(30 290 190)" />
+                            
+                            <circle cx="200" cy="40" r="18" fill="#D4A574" opacity="0.9" className="animate-pulse" />
+                            <circle cx="200" cy="40" r="26" fill="#D4A574" opacity="0.3" className="animate-ping" />
+                            <text x="200" y="45" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">馆藏</text>
                           </g>
                         </svg>
                       </div>

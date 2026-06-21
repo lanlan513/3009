@@ -150,3 +150,47 @@ export interface Butterfly {
   popularity: number;
   flight: FlightInfo;
 }
+
+export type SpecimenCategory = "历史标本" | "珍稀物种" | "已灭绝近缘种";
+
+export interface DiscoveryRecord {
+  date: string;
+  discoverer: string;
+  location: string;
+  description: string;
+}
+
+export interface ResearchRecord {
+  year: string;
+  researcher: string;
+  institution: string;
+  title: string;
+  description: string;
+}
+
+export interface Specimen {
+  id: string;
+  name: string;
+  latinName: string;
+  family: string;
+  genus: string;
+  category: SpecimenCategory;
+  specimenNumber: string;
+  collectionDate: string;
+  collectionLocation: string;
+  collector: string;
+  donor: string;
+  image: string;
+  wingspan: string;
+  description: string;
+  condition: "完美" | "良好" | "一般" | "破损" | string;
+  preservationMethod: string;
+  storageLocation: string;
+  rarity: RarityLevel;
+  conservationStatus: "无危" | "近危" | "易危" | "濒危" | "极危" | "灭绝" | string;
+  discoveryHistory: DiscoveryRecord[];
+  researchRecords: ResearchRecord[];
+  notes: string;
+  tags: string[];
+  relatedButterflyId?: string;
+}
