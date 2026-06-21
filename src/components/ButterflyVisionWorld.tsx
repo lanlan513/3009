@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { Eye, Sparkles, Sun, Info, Play, Pause, RotateCcw, ZoomIn, ZoomOut, Move } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type VisionMode = "human" | "butterfly";
+export type VisionMode = "human" | "butterfly";
 
 interface Flower {
   x: number;
@@ -47,15 +47,18 @@ interface UVLightBeam {
   speed: number;
 }
 
-export default function ButterflyVisionWorld() {
+interface ButterflyVisionWorldProps {
+  visionMode: VisionMode;
+  onToggleVision: () => void;
+}
+
+export default function ButterflyVisionWorld({ visionMode, onToggleVision }: ButterflyVisionWorldProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>(0);
   const timeRef = useRef<number>(0);
   
-  const [visionMode, setVisionMode] = useState<VisionMode>("human");
   const [isPlaying, setIsPlaying] = useState(true);
-  const [showUVOverlay, setShowUVOverlay] = useState(false);
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
@@ -679,11 +682,13 @@ export default function ButterflyVisionWorld() {
       updateButterflies();
     }
 
+    ctx.clearRect(0, 0, width, height);
+
+    drawBackground(ctx, width, height, timeRef.current, visionMode);
+
     ctx.save();
     ctx.translate(pan.x, pan.y);
     ctx.scale(zoom, zoom);
-
-    drawBackground(ctx, width, height, timeRef.current, visionMode);
 
     flowersRef.current.forEach((flower) => {
       drawFlower(ctx, flower, timeRef.current, visionMode);
@@ -783,64 +788,45 @@ export default function ButterflyVisionWorld() {
           onWheel={handleWheel}
         />
 
-        <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setVisionMode("human")}
-              className={cn(
-                "flex items-center gap-2 px-4 py-2 rounded-full font-medium text-sm transition-all duration-300",
-                visionMode === "human"
-                  ? "bg-white shadow-lg text-amber-600"
-                  : "bg-white/60 backdrop-blur text-butterfly-ink/60 hover:bg-white/80"
-              )}
-            >
-              <Eye className="w-4 h-4" />
-              人类视角
-            </button>
-            <button
-              onClick={() => setVisionMode("butterfly")}
-              className={cn(
-                "flex items-center gap-2 px-4 py-2 rounded-full font-medium text-sm transition-all duration-300",
-                visionMode === "butterfly"
-                  ? "bg-violet-600 shadow-lg text-white"
-                  : "bg-white/60 backdrop-blur text-butterfly-ink/60 hover:bg-white/80"
-              )}
-            >
-              <Sparkles className="w-4 h-4" />
-              蝴蝶视角
-            </button>
+        <div className="absolute top-4 right-4 flex items-center gap-2">
+          <div
+            className={cn(
+              "flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur text-xs font-medium",
+              visionMode === "butterfly"
+                ? "bg-violet-600/80 text-white"
+                : "bg-white/80 text-amber-700"
+            )}
+          >
+            {visionMode === "butterfly" ? "🦋 蝴蝶视角" : "👁️ 人类视角"}
           </div>
-
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setIsPlaying(!isPlaying)}
-              className="p-2 rounded-full bg-white/80 backdrop-blur hover:bg-white transition-colors text-butterfly-ink"
-              title={isPlaying ? "暂停" : "播放"}
-            >
-              {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
-            </button>
-            <button
-              onClick={() => setZoom((prev) => Math.min(2, prev * 1.2))}
-              className="p-2 rounded-full bg-white/80 backdrop-blur hover:bg-white transition-colors text-butterfly-ink"
-              title="放大"
-            >
-              <ZoomIn className="w-5 h-5" />
-            </button>
-            <button
-              onClick={() => setZoom((prev) => Math.max(0.5, prev * 0.8))}
-              className="p-2 rounded-full bg-white/80 backdrop-blur hover:bg-white transition-colors text-butterfly-ink"
-              title="缩小"
-            >
-              <ZoomOut className="w-5 h-5" />
-            </button>
-            <button
-              onClick={resetView}
-              className="p-2 rounded-full bg-white/80 backdrop-blur hover:bg-white transition-colors text-butterfly-ink"
-              title="重置视图"
-            >
-              <RotateCcw className="w-5 h-5" />
-            </button>
-          </div>
+          <button
+            onClick={() => setIsPlaying(!isPlaying)}
+            className="p-2 rounded-full bg-white/80 backdrop-blur hover:bg-white transition-colors text-butterfly-ink"
+            title={isPlaying ? "暂停" : "播放"}
+          >
+            {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
+          </button>
+          <button
+            onClick={() => setZoom((prev) => Math.min(2, prev * 1.2))}
+            className="p-2 rounded-full bg-white/80 backdrop-blur hover:bg-white transition-colors text-butterfly-ink"
+            title="放大"
+          >
+            <ZoomIn className="w-5 h-5" />
+          </button>
+          <button
+            onClick={() => setZoom((prev) => Math.max(0.5, prev * 0.8))}
+            className="p-2 rounded-full bg-white/80 backdrop-blur hover:bg-white transition-colors text-butterfly-ink"
+            title="缩小"
+          >
+            <ZoomOut className="w-5 h-5" />
+          </button>
+          <button
+            onClick={resetView}
+            className="p-2 rounded-full bg-white/80 backdrop-blur hover:bg-white transition-colors text-butterfly-ink"
+            title="重置视图"
+          >
+            <RotateCcw className="w-5 h-5" />
+          </button>
         </div>
 
         <div className="absolute bottom-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 backdrop-blur text-xs text-butterfly-ink/60">
@@ -857,7 +843,7 @@ export default function ButterflyVisionWorld() {
               <div className="flex-1">
                 <h4 className="font-semibold text-butterfly-ink mb-1">蝴蝶视觉世界</h4>
                 <p className="text-sm text-butterfly-ink/70 leading-relaxed mb-2">
-                  切换"蝴蝶视角"查看花瓣上隐藏的紫外线蜜源标记。点击花朵或蝴蝶了解更多信息！
+                  使用页面顶部的「人类视角/蝴蝶视角」切换按钮，观察花瓣上隐藏的紫外线蜜源标记。点击花朵或蝴蝶了解更多信息！
                 </p>
                 <button
                   onClick={() => setShowTutorial(false)}
