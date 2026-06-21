@@ -13,6 +13,7 @@ import RareButterflyArchive from "@/pages/RareButterflyArchive";
 import RareButterflyDetail from "@/pages/RareButterflyDetail";
 import PatternRecognition from "@/pages/PatternRecognition";
 import ObservationCalendar from "@/pages/ObservationCalendar";
+import ButterflyVision from "@/pages/ButterflyVision";
 
 export default function App() {
   return (
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="/rare-butterfly/:id" element={<RareButterflyDetail />} />
         <Route path="/pattern-recognition" element={<PatternRecognition />} />
         <Route path="/observation-calendar" element={<ObservationCalendar />} />
+        <Route path="/butterfly-vision" element={<ButterflyVision />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>

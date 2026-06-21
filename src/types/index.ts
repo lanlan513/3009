@@ -435,3 +435,50 @@ export interface SeasonalPattern {
   overwinteringStage: "卵" | "幼虫" | "蛹" | "成虫" | "不越冬";
   region: string;
 }
+
+export type VisionScenarioCategory = "觅食导航" | "配偶识别" | "领地防御" | "天敌规避" | "产卵选择";
+
+export interface UVPatternInfo {
+  name: string;
+  description: string;
+  humanVisible: boolean;
+  uvColor: string;
+  visibleColor: string;
+  function: string;
+}
+
+export interface FlowerSignal {
+  name: string;
+  latinName: string;
+  image: string;
+  humanDescription: string;
+  butterflyDescription: string;
+  uvPattern: string;
+  uvColor: string;
+  nectarGuideVisible: boolean;
+  nectarGuideDescription?: string;
+  landingStripVisible: boolean;
+  landingStripDescription?: string;
+}
+
+export interface VisionScenario {
+  id: string;
+  title: string;
+  subtitle: string;
+  category: VisionScenarioCategory;
+  sceneImage: string;
+  humanDescription: string;
+  butterflyDescription: string;
+  uvPatterns: UVPatternInfo[];
+  keyDifferences: string[];
+  butterflyAdvantage: string;
+}
+
+export interface ButterflyVisionCapability {
+  wavelengthRange: string;
+  colorTypes: string[];
+  fieldOfView: string;
+  flickerFusionRate: string;
+  specialAbilities: string[];
+  limitations: string[];
+}
