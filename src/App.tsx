@@ -11,6 +11,7 @@ import ButterflyCompareLab from "@/pages/ButterflyCompareLab";
 import DiscoveryTimeline from "@/pages/DiscoveryTimeline";
 import RareButterflyArchive from "@/pages/RareButterflyArchive";
 import RareButterflyDetail from "@/pages/RareButterflyDetail";
+import PatternRecognition from "@/pages/PatternRecognition";
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/discovery-timeline" element={<DiscoveryTimeline />} />
         <Route path="/rare-archive" element={<RareButterflyArchive />} />
         <Route path="/rare-butterfly/:id" element={<RareButterflyDetail />} />
+        <Route path="/pattern-recognition" element={<PatternRecognition />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>

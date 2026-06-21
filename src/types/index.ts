@@ -295,3 +295,63 @@ export interface EraInfo {
   description: string;
   color: string;
 }
+
+export type EyespotShape = "圆形" | "椭圆形" | "不规则形" | "新月形";
+export type StripePattern = "横条纹" | "纵条纹" | "放射纹" | "锯齿纹" | "网状纹" | "波浪纹";
+export type GradientDirection = "由内向外" | "由外向内" | "由上至下" | "由下至上" | "对角线" | "由基向外";
+export type WingPosition = "前翅" | "后翅" | "前后翅" | "前翅正面" | "前翅反面" | "后翅正面" | "后翅反面" | "前后翅正面" | "前后翅反面";
+export type PatternColor =
+  | "橙黑" | "蓝黑" | "黄黑" | "绿黑" | "红黑"
+  | "纯白" | "乳白" | "金黄" | "银白" | "翠绿"
+  | "粉红" | "紫红" | "棕褐" | "灰白" | "多彩虹彩";
+export type TailShape = "无尾突" | "短尾突" | "长尾突" | "双尾突" | "燕尾突";
+export type WingEdge = "平滑" | "波浪状" | "锯齿状" | "尾突状";
+
+export interface EyespotElement {
+  id: string;
+  position: WingPosition;
+  location: string;
+  shape: EyespotShape;
+  size: "极小" | "小" | "中" | "大" | "极大";
+  rings: string[];
+  centerColor: string;
+  description: string;
+  count: number;
+}
+
+export interface StripeElement {
+  id: string;
+  position: WingPosition;
+  pattern: StripePattern;
+  color: string;
+  backgroundColor: string;
+  width: "细线" | "中等" | "粗线" | "宽带";
+  count: number;
+  description: string;
+}
+
+export interface GradientElement {
+  id: string;
+  position: WingPosition;
+  direction: GradientDirection;
+  colors: string[];
+  transition: "柔和过渡" | "清晰分界" | "斑驳渐变";
+  description: string;
+}
+
+export interface WingPattern {
+  butterflyId: string;
+  butterflyName: string;
+  baseColor: string;
+  dominantColors: PatternColor[];
+  eyespots: EyespotElement[];
+  stripes: StripeElement[];
+  gradients: GradientElement[];
+  tailShape: TailShape;
+  wingEdge: WingEdge;
+  hasMetallicSheen: boolean;
+  metallicDescription?: string;
+  patternStyle: string[];
+  identificationTips: string[];
+  overallDescription: string;
+}
