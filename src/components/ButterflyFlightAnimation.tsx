@@ -43,6 +43,8 @@ export default function ButterflyFlightAnimation({
   const [flights, setFlights] = useState<ButterflyFlight[]>([]);
   const animationRef = useRef<number | null>(null);
   const startTimeRef = useRef<number | null>(null);
+  const pausedAtRef = useRef<number>(0);
+  const lastTimestampRef = useRef<number | null>(null);
 
   useEffect(() => {
     setFlights(
@@ -54,6 +56,8 @@ export default function ButterflyFlightAnimation({
       }))
     );
     startTimeRef.current = null;
+    pausedAtRef.current = 0;
+    lastTimestampRef.current = null;
   }, [butterflies]);
 
   const getPositionAtTime = useCallback(
@@ -79,11 +83,11 @@ export default function ButterflyFlightAnimation({
 
   const animate = useCallback(
     (timestamp: number) => {
-      if (!startTimeRef.current) {
+      if (startTimeRef.current === null) {
         startTimeRef.current = timestamp;
       }
 
-      const elapsed = timestamp - startTimeRef.current;
+      const elapsed = timestamp - startTimeRef.current - pausedAtRef.current;
 
       setFlights((prev) =>
         prev.map((flight) => {
@@ -96,6 +100,7 @@ export default function ButterflyFlightAnimation({
         })
       );
 
+      lastTimestampRef.current = timestamp;
       animationRef.current = requestAnimationFrame(animate);
     },
     [getPositionAtTime]
@@ -103,22 +108,33 @@ export default function ButterflyFlightAnimation({
 
   useEffect(() => {
     if (isPlaying) {
+      if (lastTimestampRef.current !== null && startTimeRef.current !== null) {
+        pausedAtRef.current += performance.now() - lastTimestampRef.current;
+      }
       animationRef.current = requestAnimationFrame(animate);
     } else {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
       }
     }
 
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
       }
     };
   }, [isPlaying, animate]);
 
   const handleReset = () => {
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+      animationRef.current = null;
+    }
     startTimeRef.current = null;
+    pausedAtRef.current = 0;
+    lastTimestampRef.current = null;
     setFlights((prev) =>
       prev.map((flight) => ({
         ...flight,

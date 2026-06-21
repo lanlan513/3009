@@ -1,5 +1,5 @@
-import { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { useState, useMemo, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import {
   Home,
   ChevronRight,
@@ -51,9 +51,29 @@ const habitatConfig: Record<FlightHabitatType, { icon: string; color: string }> 
 };
 
 export default function FlightObservation() {
-  const [selectedIds, setSelectedIds] = useState<string[]>(["1", "2"]);
+  const [searchParams] = useSearchParams();
+  const [selectedIds, setSelectedIds] = useState<string[]>(() => {
+    const idsParam = searchParams.get("ids");
+    if (idsParam) {
+      const ids = idsParam.split(",").filter(Boolean);
+      if (ids.length > 0) {
+        return ids.slice(0, 5);
+      }
+    }
+    return ["1", "2"];
+  });
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState<"animation" | "compare">("animation");
+
+  useEffect(() => {
+    const idsParam = searchParams.get("ids");
+    if (idsParam) {
+      const ids = idsParam.split(",").filter(Boolean);
+      if (ids.length > 0) {
+        setSelectedIds(ids.slice(0, 5));
+      }
+    }
+  }, [searchParams]);
 
   const filteredButterflies = useMemo(() => {
     if (!searchQuery.trim()) return butterflies;
