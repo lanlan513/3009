@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Sparkles, ArrowRight, Shuffle, ChevronRight, Globe2, MapPin, TreeDeciduous, Layers, BookOpen, Gem, Flame } from "lucide-react";
+import { Sparkles, ArrowRight, Shuffle, ChevronRight, Globe2, MapPin, TreeDeciduous, Layers, BookOpen, Gem, Flame, GitCompare, Ruler, Palette } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import ButterflyCard from "@/components/ButterflyCard";
 import ButterflyIcon from "@/components/ButterflyIcon";
@@ -463,6 +463,128 @@ export default function Home() {
                             <circle cx="200" cy="40" r="26" fill="#D4A574" opacity="0.3" className="animate-ping" />
                             <text x="200" y="45" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">馆藏</text>
                           </g>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 对比实验室入口 */}
+      <section className="py-16 bg-cream-100 relative overflow-hidden">
+        <div
+          className="absolute -top-10 -right-10 w-64 h-64 rounded-full bg-butterfly-pink/20 blur-3xl"
+          aria-hidden
+        />
+        <div
+          className="absolute -bottom-10 -left-10 w-56 h-56 rounded-full bg-purple-200/30 blur-3xl"
+          aria-hidden
+        />
+
+        <div className="container relative mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <Link
+              to="/compare-lab"
+              className="group block opacity-0 animate-fade-up"
+              style={{ animationDelay: "0.6s" }}
+            >
+              <div className="relative rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-cream-50 via-white to-purple-100/40 border border-purple-200/30 shadow-soft hover:shadow-hover transition-all duration-500 hover:-translate-y-1">
+                <div
+                  className="absolute inset-0 opacity-30 bg-grain"
+                  aria-hidden
+                />
+
+                <div className="relative p-8 md:p-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 text-sm text-purple-700 font-medium mb-5">
+                        <GitCompare className="w-4 h-4" strokeWidth={1.8} />
+                        Morphology Lab
+                      </div>
+
+                      <h2 className="font-display text-3xl md:text-4xl font-semibold text-butterfly-ink leading-tight mb-4">
+                        蝴蝶形态对比实验室
+                      </h2>
+                      <p className="text-butterfly-ink/60 leading-relaxed mb-6">
+                        选择 2-4 种蝴蝶进行多维度形态学对比，从翅展、色彩、花纹到栖息地与生命周期，
+                        深入探索蝶类世界的千姿百态。
+                      </p>
+
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-purple-100/50 text-purple-700">
+                          <Ruler className="w-3 h-3" strokeWidth={2} />
+                          翅展形态
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-pink-100/50 text-pink-700">
+                          <Palette className="w-3 h-3" strokeWidth={2} />
+                          色彩花纹
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-green-100/50 text-green-700">
+                          <TreeDeciduous className="w-3 h-3" strokeWidth={2} />
+                          栖息生态
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs bg-butterfly-ink/10 text-butterfly-ink/70">
+                          同步缩放对比
+                        </span>
+                      </div>
+
+                      <div className="inline-flex items-center gap-2 text-purple-700 font-medium group-hover:gap-3 transition-all duration-300">
+                        开始对比
+                        <ArrowRight className="w-4 h-4" strokeWidth={2} />
+                      </div>
+                    </div>
+
+                    <div className="relative">
+                      <div className="absolute -inset-4 bg-gradient-to-br from-purple-200/30 via-butterfly-pink/15 to-butterfly-gold/20 rounded-[2rem] blur-xl opacity-60" />
+                      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-cream-100 to-purple-50">
+                        <svg viewBox="0 0 400 300" className="w-full h-full">
+                          <defs>
+                            <linearGradient id="compareBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stopColor="#FFFBF7" />
+                              <stop offset="100%" stopColor="#F3E8FF" />
+                            </linearGradient>
+                          </defs>
+                          <rect width="400" height="300" fill="url(#compareBg)" />
+                          
+                          <g className="animate-float" style={{ transformOrigin: "center", animationDelay: "0.3s" }}>
+                            <rect x="30" y="50" width="160" height="130" rx="12" fill="white" stroke="#E9D5FF" strokeWidth="2" />
+                            <rect x="35" y="55" width="150" height="100" rx="8" fill="#FDF2F8" />
+                            <ellipse cx="110" cy="105" rx="30" ry="20" fill="#E8B4D4" opacity="0.5" transform="rotate(-15 110 105)" />
+                            <ellipse cx="110" cy="105" rx="30" ry="20" fill="#E8B4D4" opacity="0.5" transform="rotate(15 110 105)" />
+                            <rect x="45" y="162" width="80" height="6" rx="3" fill="#F3E8FF" />
+                            <rect x="45" y="172" width="50" height="4" rx="2" fill="#E9D5FF" />
+                          </g>
+
+                          <g className="animate-float" style={{ transformOrigin: "center", animationDelay: "0.6s" }}>
+                            <rect x="210" y="50" width="160" height="130" rx="12" fill="white" stroke="#C4B5FD" strokeWidth="2" />
+                            <rect x="215" y="55" width="150" height="100" rx="8" fill="#ECFDF5" />
+                            <ellipse cx="290" cy="105" rx="32" ry="22" fill="#86B98E" opacity="0.5" transform="rotate(-10 290 105)" />
+                            <ellipse cx="290" cy="105" rx="32" ry="22" fill="#86B98E" opacity="0.5" transform="rotate(10 290 105)" />
+                            <rect x="225" y="162" width="80" height="6" rx="3" fill="#D1FAE5" />
+                            <rect x="225" y="172" width="60" height="4" rx="2" fill="#6EE7B7" />
+                          </g>
+
+                          <g className="animate-float" style={{ transformOrigin: "center", animationDelay: "0.9s" }}>
+                            <rect x="30" y="200" width="160" height="70" rx="12" fill="white" stroke="#FDE68A" strokeWidth="2" />
+                            <rect x="45" y="212" width="60" height="8" rx="4" fill="#FEF3C7" />
+                            <rect x="45" y="226" width="120" height="6" rx="3" fill="#FDE68A" opacity="0.6" />
+                            <rect x="45" y="238" width="90" height="6" rx="3" fill="#FDE68A" opacity="0.4" />
+                          </g>
+
+                          <g className="animate-float" style={{ transformOrigin: "center", animationDelay: "1.2s" }}>
+                            <rect x="210" y="200" width="160" height="70" rx="12" fill="white" stroke="#FBCFE8" strokeWidth="2" />
+                            <rect x="225" y="212" width="60" height="8" rx="4" fill="#FCE7F3" />
+                            <rect x="225" y="226" width="120" height="6" rx="3" fill="#FBCFE8" opacity="0.6" />
+                            <rect x="225" y="238" width="90" height="6" rx="3" fill="#FBCFE8" opacity="0.4" />
+                          </g>
+
+                          <circle cx="200" cy="115" r="12" fill="#A78BFA" opacity="0.9" className="animate-pulse" />
+                          <circle cx="200" cy="115" r="20" fill="#A78BFA" opacity="0.3" className="animate-ping" />
+                          <text x="200" y="120" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">VS</text>
                         </svg>
                       </div>
                     </div>
