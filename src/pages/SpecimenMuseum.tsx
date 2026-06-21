@@ -6,6 +6,17 @@ import { specimens, specimenCategories, conservationStatusColors, conditionColor
 import type { Specimen } from "@/types";
 import { cn } from "@/lib/utils";
 
+const ENHANCED_3D_IDS = ["specimen-1", "specimen-2", "specimen-4"];
+
+function SparklesBadge() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="w-3 h-3" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3L13 7L17 8L13 9L12 13L11 9L7 8L11 7L12 3Z" fill="currentColor" />
+      <path d="M19 14L19.6 15.6L21.2 16.2L19.6 16.8L19 18.4L18.4 16.8L16.8 16.2L18.4 15.6L19 14Z" fill="currentColor" opacity="0.8" />
+    </svg>
+  );
+}
+
 const categoryIcons: Record<string, React.ReactNode> = {
   "历史标本": <BookOpen className="w-4 h-4" strokeWidth={1.8} />,
   "珍稀物种": <Gem className="w-4 h-4" strokeWidth={1.8} />,
@@ -229,6 +240,12 @@ function SpecimenCard({ specimen, index }: { specimen: Specimen; index: number }
               <div className="absolute -bottom-1 -right-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-white/90 border border-amber-200 text-butterfly-ink">
                 {specimen.specimenNumber}
               </div>
+              {ENHANCED_3D_IDS.includes(specimen.id) && (
+                <div className="absolute -top-2 -left-2 bg-gradient-to-br from-amber-400 via-rose-400 to-amber-500 text-white rounded-xl px-2 py-1 shadow-lg flex items-center gap-1 animate-pulse-slow">
+                  <SparklesBadge />
+                  <span className="text-[10px] font-bold tracking-wide">3D增强</span>
+                </div>
+              )}
             </div>
 
             <div className="flex-1 min-w-0">
@@ -298,7 +315,16 @@ function SpecimenCard({ specimen, index }: { specimen: Specimen; index: number }
               {specimen.family} · {specimen.genus}
             </span>
             <span className={cn("inline-flex items-center gap-1 text-sm font-medium", categoryAccentColors[specimen.category], "group-hover:gap-2 transition-all")}>
-              查看3D展示
+              {ENHANCED_3D_IDS.includes(specimen.id) ? (
+                <span className="inline-flex items-center gap-1">
+                  <span className="inline-flex w-4 h-4 items-center justify-center text-rose-500">
+                    <SparklesBadge />
+                  </span>
+                  增强3D解剖
+                </span>
+              ) : (
+                "查看3D展示"
+              )}
               <ArrowRight className="w-4 h-4" strokeWidth={1.8} />
             </span>
           </div>

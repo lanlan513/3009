@@ -27,10 +27,34 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Butterfly3DViewer, { butterflyConfigs } from "@/components/Butterfly3DViewer";
 import { getSpecimenById, conservationStatusColors, conditionColors } from "@/data/specimens";
 import { getButterflyById } from "@/data/butterflies";
 import type { Specimen, DiscoveryRecord, ResearchRecord } from "@/types";
 import { cn } from "@/lib/utils";
+
+const ENHANCED_3D_IDS = ["specimen-1", "specimen-2", "specimen-4"];
+
+function Sparkles3D({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3L13.5 8L19 9.5L13.5 11L12 16L10.5 11L5 9.5L10.5 8L12 3Z" fill="currentColor" opacity="0.9" />
+      <path d="M19 14L19.8 16.2L22 17L19.8 17.8L19 20L18.2 17.8L16 17L18.2 16.2L19 14Z" fill="currentColor" opacity="0.7" />
+    </svg>
+  );
+}
+
+function Move3D({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M5 9L2 12L5 15" />
+      <path d="M9 5L12 2L15 5" />
+      <path d="M15 19L12 22L9 19" />
+      <path d="M19 9L22 12L19 15" />
+      <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.6" />
+    </svg>
+  );
+}
 
 const categoryIcons: Record<string, React.ReactNode> = {
   "历史标本": <BookOpen className="w-5 h-5" strokeWidth={1.8} />,
@@ -193,112 +217,146 @@ export default function SpecimenDetail() {
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           <div className="lg:col-span-3 space-y-6">
-            <div
-              ref={viewerRef}
-              className={cn(
-                "relative rounded-3xl overflow-hidden border-2 border-white/50 shadow-xl cursor-grab active:cursor-grabbing",
-                "bg-gradient-to-br",
-                categoryGradients[specimen.category]
-              )}
-              style={{ minHeight: "500px" }}
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-              onMouseLeave={handleMouseUp}
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-            >
-              <div className="absolute inset-0 bg-grain opacity-30" aria-hidden />
+            {ENHANCED_3D_IDS.includes(specimen.id) ? (
+              <div
+                className={cn(
+                  "relative rounded-3xl overflow-hidden border-2 border-white/50 shadow-xl flex flex-col",
+                  "bg-gradient-to-br",
+                  categoryGradients[specimen.category]
+                )}
+                style={{ height: "560px" }}
+              >
+                <div className="absolute inset-0 bg-grain opacity-20 pointer-events-none z-0" aria-hidden />
 
-              <div className="absolute inset-0 flex items-center justify-center p-8">
-                <div
-                  className="relative transition-transform duration-100 ease-out"
-                  style={{
-                    transform: `perspective(1000px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale(${zoom})`,
-                    transformStyle: "preserve-3d",
-                  }}
-                >
-                  <img
-                    src={specimen.image}
-                    alt={specimen.name}
-                    className="w-80 h-80 object-contain rounded-2xl shadow-2xl"
-                    draggable={false}
-                    style={{
-                      filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.3))",
-                      backfaceVisibility: "visible",
-                    }}
-                  />
+                <Butterfly3DViewer specimenId={specimen.id} className="relative z-10 flex-1" />
 
-                  <div
-                    className="absolute inset-0 rounded-2xl"
-                    style={{
-                      background: `linear-gradient(${rotation.y * -0.5 + 45}deg, rgba(255,255,255,0.3) 0%, transparent 50%, rgba(0,0,0,0.1) 100%)`,
-                      pointerEvents: "none",
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div className="absolute top-4 left-4 flex items-center gap-2">
-                <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-2 shadow-lg">
-                  <span className="text-xs font-mono text-butterfly-ink/70">
-                    {specimen.specimenNumber}
-                  </span>
-                </div>
-              </div>
-
-              <div className="absolute top-4 right-4 flex flex-col gap-2">
-                <button
-                  onClick={handleZoomIn}
-                  className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg hover:bg-white transition-colors"
-                  title="放大"
-                >
-                  <ZoomIn className="w-4 h-4 text-butterfly-ink" strokeWidth={2} />
-                </button>
-                <button
-                  onClick={handleZoomOut}
-                  className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg hover:bg-white transition-colors"
-                  title="缩小"
-                >
-                  <ZoomOut className="w-4 h-4 text-butterfly-ink" strokeWidth={2} />
-                </button>
-                <button
-                  onClick={resetView}
-                  className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg hover:bg-white transition-colors"
-                  title="重置视角"
-                >
-                  <RotateCcw className="w-4 h-4 text-butterfly-ink" strokeWidth={2} />
-                </button>
-              </div>
-
-              <div className="absolute bottom-4 left-4">
-                <button
-                  onClick={() => setAutoRotate(!autoRotate)}
-                  className={cn(
-                    "inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-sm font-medium transition-all",
-                    autoRotate
-                      ? "bg-white text-butterfly-ink shadow-lg"
-                      : "bg-white/70 text-butterfly-ink/60 hover:bg-white/90"
+                <div className="absolute top-4 left-4 flex items-center gap-2 z-30 pointer-events-none">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-2xl px-4 py-2 shadow-lg">
+                    <span className="text-xs font-mono text-butterfly-ink/70">
+                      {specimen.specimenNumber}
+                    </span>
+                  </div>
+                  {butterflyConfigs[specimen.id] && (
+                    <div className="bg-gradient-to-r from-amber-400/90 to-rose-400/90 text-white rounded-2xl px-3 py-2 shadow-lg flex items-center gap-1.5">
+                      <Sparkles3D className="w-3.5 h-3.5" />
+                      <span className="text-xs font-semibold">增强3D</span>
+                    </div>
                   )}
-                >
-                  <Move className="w-4 h-4" strokeWidth={2} />
-                  {autoRotate ? "自动旋转中" : "已暂停"}
-                </button>
-              </div>
+                </div>
 
-              <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-2 shadow-lg">
-                <div className="flex items-center gap-4 text-xs text-butterfly-ink/60">
-                  <span>X: {Math.round(rotation.x)}°</span>
-                  <span>Y: {Math.round(rotation.y)}°</span>
-                  <span>×{zoom.toFixed(1)}</span>
+                <div className="absolute bottom-24 left-1/2 -translate-x-1/2 bg-white/85 backdrop-blur-md rounded-full px-5 py-2.5 text-xs text-butterfly-ink/70 z-30 pointer-events-none shadow-md flex items-center gap-2 border border-amber-100">
+                  <Move3D className="w-3.5 h-3.5 text-butterfly-pink-deep" />
+                  <span>拖动旋转 · 滚轮缩放 · 点击金色光点查看解剖细节</span>
                 </div>
               </div>
+            ) : (
+              <div
+                ref={viewerRef}
+                className={cn(
+                  "relative rounded-3xl overflow-hidden border-2 border-white/50 shadow-xl cursor-grab active:cursor-grabbing",
+                  "bg-gradient-to-br",
+                  categoryGradients[specimen.category]
+                )}
+                style={{ minHeight: "500px" }}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
+                <div className="absolute inset-0 bg-grain opacity-30" aria-hidden />
 
-              <div className="absolute bottom-20 left-1/2 -translate-x-1/2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 text-xs text-butterfly-ink/60">
-                拖动标本可360°旋转查看 · 滚轮或按钮缩放
+                <div className="absolute inset-0 flex items-center justify-center p-8">
+                  <div
+                    className="relative transition-transform duration-100 ease-out"
+                    style={{
+                      transform: `perspective(1000px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale(${zoom})`,
+                      transformStyle: "preserve-3d",
+                    }}
+                  >
+                    <img
+                      src={specimen.image}
+                      alt={specimen.name}
+                      className="w-80 h-80 object-contain rounded-2xl shadow-2xl"
+                      draggable={false}
+                      style={{
+                        filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.3))",
+                        backfaceVisibility: "visible",
+                      }}
+                    />
+
+                    <div
+                      className="absolute inset-0 rounded-2xl"
+                      style={{
+                        background: `linear-gradient(${rotation.y * -0.5 + 45}deg, rgba(255,255,255,0.3) 0%, transparent 50%, rgba(0,0,0,0.1) 100%)`,
+                        pointerEvents: "none",
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <div className="absolute top-4 left-4 flex items-center gap-2">
+                  <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-2 shadow-lg">
+                    <span className="text-xs font-mono text-butterfly-ink/70">
+                      {specimen.specimenNumber}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="absolute top-4 right-4 flex flex-col gap-2">
+                  <button
+                    onClick={handleZoomIn}
+                    className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg hover:bg-white transition-colors"
+                    title="放大"
+                  >
+                    <ZoomIn className="w-4 h-4 text-butterfly-ink" strokeWidth={2} />
+                  </button>
+                  <button
+                    onClick={handleZoomOut}
+                    className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg hover:bg-white transition-colors"
+                    title="缩小"
+                  >
+                    <ZoomOut className="w-4 h-4 text-butterfly-ink" strokeWidth={2} />
+                  </button>
+                  <button
+                    onClick={resetView}
+                    className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg hover:bg-white transition-colors"
+                    title="重置视角"
+                  >
+                    <RotateCcw className="w-4 h-4 text-butterfly-ink" strokeWidth={2} />
+                  </button>
+                </div>
+
+                <div className="absolute bottom-4 left-4">
+                  <button
+                    onClick={() => setAutoRotate(!autoRotate)}
+                    className={cn(
+                      "inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-sm font-medium transition-all",
+                      autoRotate
+                        ? "bg-white text-butterfly-ink shadow-lg"
+                        : "bg-white/70 text-butterfly-ink/60 hover:bg-white/90"
+                    )}
+                  >
+                    <Move className="w-4 h-4" strokeWidth={2} />
+                    {autoRotate ? "自动旋转中" : "已暂停"}
+                  </button>
+                </div>
+
+                <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-2 shadow-lg">
+                  <div className="flex items-center gap-4 text-xs text-butterfly-ink/60">
+                    <span>X: {Math.round(rotation.x)}°</span>
+                    <span>Y: {Math.round(rotation.y)}°</span>
+                    <span>×{zoom.toFixed(1)}</span>
+                  </div>
+                </div>
+
+                <div className="absolute bottom-20 left-1/2 -translate-x-1/2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 text-xs text-butterfly-ink/60">
+                  拖动标本可360°旋转查看 · 滚轮或按钮缩放
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="flex gap-2">
               <button
